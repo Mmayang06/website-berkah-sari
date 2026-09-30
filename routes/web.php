@@ -37,3 +37,20 @@ Route::get('/testimonial', function () {
 Route::get('/contact', function () {
     return view('umat.contact');
 })->name('contact');
+
+
+// admin
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+});
+
+
+// petugas input
+Route::prefix('petugas')->name('petugas.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('petugas_input.dashboard');
+    })->name('dashboard');
+});
+
