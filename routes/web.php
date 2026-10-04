@@ -54,3 +54,12 @@ Route::prefix('petugas')->name('petugas.')->group(function () {
     })->name('dashboard');
 });
 
+
+// pengurus
+Route::prefix('pengurus')->name('pengurus.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pengurus.dashboard');
+    })->name('dashboard');
+});
+
+
