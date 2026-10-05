@@ -443,7 +443,12 @@
                     <li><a class="dropdown-item py-2" href="#"><i class="fas fa-cog me-2 text-primary"></i>Pengaturan</a></li>
                     <li><a class="dropdown-item py-2" href="#"><i class="fas fa-lock me-2 text-primary"></i>Kunci Layar</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item py-2 text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Keluar</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('portal.logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item py-2 text-danger"><i class="fas fa-sign-out-alt me-2"></i>Keluar</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
 

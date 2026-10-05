@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,8 +40,15 @@ Route::get('/contact', function () {
 })->name('contact');
 
 
+// portal login (admin, pengurus, petugas)
+Route::get('/portal-pengurus', [AuthController::class, 'showLogin'])->name('portal.login');
+Route::post('/portal-pengurus', [AuthController::class, 'login'])->name('portal.login.submit');
+Route::post('/portal-pengurus/logout', [AuthController::class, 'logout'])
+    ->middleware('auth')->name('portal.logout');
+
+
 // admin
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
@@ -48,7 +56,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 // petugas input
-Route::prefix('petugas')->name('petugas.')->group(function () {
+Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])->group(function () {
     Route::get('/dashboard', function () {
         return view('petugas_input.dashboard');
     })->name('dashboard');
@@ -56,10 +64,11 @@ Route::prefix('petugas')->name('petugas.')->group(function () {
 
 
 // pengurus
-Route::prefix('pengurus')->name('pengurus.')->group(function () {
+Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus'])->group(function () {
     Route::get('/dashboard', function () {
         return view('pengurus.dashboard');
     })->name('dashboard');
 });
+
 
 
