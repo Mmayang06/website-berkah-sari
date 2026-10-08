@@ -244,7 +244,7 @@
         }
 
         .topbar-btn:hover {
-            background: var(--dark);
+            background: var(--primary);
             color: var(--light);
         }
 
@@ -381,10 +381,7 @@
 
         <div class="topbar-right">
 
-            <button class="topbar-icon-btn d-none d-lg-flex" id="btnFullscreenPetugas" title="Layar Penuh"
-                onclick="toggleFullscreenPetugas()">
-                <i class="fas fa-expand" id="fullscreenIconPetugas"></i>
-            </button>
+
 
             <!-- Notifikasi -->
             <div class="dropdown">
@@ -417,15 +414,16 @@
                 </div>
             </div>
 
-            <!-- User Profile -->
+            <!-- Akun (kotak hijau) — profil dipindahkan ke dalam -->
             <div class="dropdown h-100">
-                <div class="topbar-user h-100" data-bs-toggle="dropdown" id="petugasProfileDropdown">
-                    <div class="text-end d-none d-md-block">
-                        <div style="font-family:'Jost',sans-serif;font-weight:600;color:var(--dark);line-height:1.2;">Petugas</div>
-                        <div style="font-size:0.75rem;color:var(--secondary);">Panel Input Data</div>
+                <div class="topbar-btn d-none d-lg-flex h-100" data-bs-toggle="dropdown" id="petugasProfileDropdown"
+                    style="gap:12px;cursor:pointer;">
+                    <div class="text-end">
+                        <div style="font-family:'Jost',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2;color:#fff;">Petugas</div>
+                        <div style="font-size:0.72rem;color:rgba(255,255,255,0.8);">Petugas Input</div>
                     </div>
-                    <div class="topbar-avatar">P</div>
-                    <i class="fas fa-chevron-down text-muted" style="font-size:0.7rem;"></i>
+                    <div class="topbar-avatar" style="background:#fff;color:var(--primary);font-weight:700;">P</div>
+                    <i class="fas fa-chevron-down" style="font-size:0.7rem;color:rgba(255,255,255,0.8);"></i>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
                     <li><div class="px-4 py-2" style="font-size:0.7rem;font-weight:600;color:#a8c4aa;letter-spacing:1px;">SELAMAT DATANG!</div></li>
@@ -440,10 +438,6 @@
                     </li>
                 </ul>
             </div>
-
-            <a href="{{ route('home') }}" class="topbar-btn d-none d-lg-flex" target="_blank">
-                Lihat Website <i class="fas fa-arrow-right ms-3"></i>
-            </a>
         </div>
     </header>
 
@@ -478,16 +472,7 @@
 
     <!-- MAIN -->
     <div class="petugas-main">
-        <div class="petugas-subnav">
-            <nav class="subnav-breadcrumb">
-                <a href="{{ route('petugas.dashboard') }}">Petugas</a>
-                <span class="bc-sep">/</span>
-                <span class="bc-current">@yield('page-title', 'Dashboard')</span>
-            </nav>
-            <div>
-                @yield('subnav-actions')
-            </div>
-        </div>
+
 
         <main class="petugas-content">
             @yield('content')
@@ -498,19 +483,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        // Fullscreen toggle
-        function toggleFullscreenPetugas() {
-            const icon = document.getElementById('fullscreenIconPetugas');
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
-                icon.classList.replace('fa-expand', 'fa-compress');
-            } else {
-                document.exitFullscreen();
-                icon.classList.replace('fa-compress', 'fa-expand');
-            }
-        }
-    </script>
+
 
     @stack('scripts')
 </body>

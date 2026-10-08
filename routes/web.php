@@ -52,6 +52,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+    Route::get('/kelola-user', [App\Http\Controllers\UserController::class, 'index'])->name('kelola-user');
+    Route::post('/kelola-user', [App\Http\Controllers\UserController::class, 'store'])->name('kelola-user.store');
+    Route::put('/kelola-user/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('kelola-user.update');
+    Route::delete('/kelola-user/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('kelola-user.destroy');
+    Route::patch('/kelola-user/{user}/toggle-status', [App\Http\Controllers\UserController::class, 'toggleStatus'])->name('kelola-user.toggle-status');
 });
 
 

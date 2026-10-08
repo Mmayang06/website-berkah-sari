@@ -358,10 +358,14 @@
 
 <body>
 
+    <!-- ==================== STRIP HIJAU TUA ==================== -->
     <div style="background-color: var(--dark); height: 35px; width: 100%;"></div>
 
+        <!-- TOPBAR -->
     <header class="admin-topbar">
+        <!-- Kiri: Toggle Sidebar + Brand -->
         <div class="topbar-left">
+            <!-- Toggle sidebar -->
             <button class="topbar-toggle" id="adminSidebarToggle"
                 onclick="document.getElementById('adminSidebar').classList.toggle('show')">
                 <i class="fas fa-bars fs-5"></i>
@@ -369,16 +373,19 @@
             <a href="{{ route('admin.dashboard') }}" class="topbar-brand">
                 <h1>Berkah Sari</h1>
             </a>
+            <!-- Search Bar -->
             <div class="topbar-search d-none d-md-flex">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Cari sesuatu..." id="adminSearchInput">
             </div>
         </div>
 
-        </div>
-
+        <!-- Kanan: Notifikasi, User, Lihat Website -->
         <div class="topbar-right">
 
+
+
+            <!-- Notifikasi -->
             <div class="dropdown">
                 <button class="topbar-icon-btn" id="btnNotifications" data-bs-toggle="dropdown" title="Notifikasi">
                     <i class="fas fa-bell"></i>
@@ -416,14 +423,15 @@
                 </div>
             </div>
 
+            <!-- Akun (kotak hijau) — profil dipindahkan ke dalam -->
             <div class="dropdown h-100">
                 <div class="topbar-btn d-none d-lg-flex h-100" data-bs-toggle="dropdown" id="profileDropdown"
                     style="gap:12px;cursor:pointer;">
                     <div class="text-end">
-                        <div style="font-family:'Jost',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2;color:#fff;">Admin</div>
-                        <div style="font-size:0.72rem;color:rgba(255,255,255,0.8);">Administrator</div>
+                        <div style="font-family:'Jost',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2;color:#fff;">Pengurus</div>
+                        <div style="font-size:0.72rem;color:rgba(255,255,255,0.8);">Pengurus</div>
                     </div>
-                    <div class="topbar-avatar" style="background:#fff;color:var(--primary);font-weight:700;">A</div>
+                    <div class="topbar-avatar" style="background:#fff;color:var(--primary);font-weight:700;">P</div>
                     <i class="fas fa-chevron-down" style="font-size:0.7rem;color:rgba(255,255,255,0.8);"></i>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
@@ -467,13 +475,13 @@
             <a href="#" class="nav-link {{ request()->routeIs('admin.testimonial*') ? 'active' : '' }}">
                 <i class="fas fa-star"></i> Testimoni
             </a>
-            <a href="{{ route('admin.kelola-user') }}" class="nav-link {{ request()->routeIs('admin.kelola-user*') ? 'active' : '' }}">
-                <i class="fas fa-user-cog"></i> Kelola User
-            </a>
 
             <div class="nav-section-label">Laporan & Sistem</div>
             <a href="#" class="nav-link {{ request()->routeIs('admin.laporan*') ? 'active' : '' }}">
                 <i class="fas fa-chart-bar"></i> Laporan
+            </a>
+            <a href="{{ route('admin.kelola-user') }}" class="nav-link {{ request()->routeIs('admin.kelola-user*') ? 'active' : '' }}">
+                <i class="fas fa-user-cog"></i> Kelola User
             </a>
             <a href="#" class="nav-link {{ request()->routeIs('admin.pengaturan*') ? 'active' : '' }}">
                 <i class="fas fa-cog"></i> Pengaturan
