@@ -78,6 +78,12 @@ Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus
     Route::get('/dashboard', function () {
         return view('pengurus.dashboard');
     })->name('dashboard');
+
+    Route::get('/akun-saya', function () {
+        return view('pengurus.akun-saya');
+    })->name('akun-saya');
+
+    Route::put('/akun-saya/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('akun-saya.update');
 });
 
 

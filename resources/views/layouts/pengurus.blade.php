@@ -436,9 +436,7 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
                     <li><div class="px-4 py-2" style="font-size:0.7rem;font-weight:600;color:#a8c4aa;letter-spacing:1px;">SELAMAT DATANG!</div></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-user me-2 text-primary"></i>Akun Saya</a></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-cog me-2 text-primary"></i>Pengaturan</a></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-lock me-2 text-primary"></i>Kunci Layar</a></li>
+                    <li><a class="dropdown-item py-2" href="{{ route('pengurus.akun-saya') }}"><i class="fas fa-user me-2 text-primary"></i>Akun Saya</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('portal.logout') }}">
@@ -455,7 +453,7 @@
     <aside class="admin-sidebar" id="adminSidebar">
         <nav class="sidebar-nav">
             <div class="nav-section-label">Utama</div>
-            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <a href="{{ route('pengurus.dashboard') }}" class="nav-link {{ request()->routeIs('pengurus.dashboard') ? 'active' : '' }}">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
 
