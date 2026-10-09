@@ -428,9 +428,7 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
                     <li><div class="px-4 py-2" style="font-size:0.7rem;font-weight:600;color:#a8c4aa;letter-spacing:1px;">SELAMAT DATANG!</div></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-user me-2 text-primary"></i>Akun Saya</a></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-cog me-2 text-primary"></i>Pengaturan</a></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-lock me-2 text-primary"></i>Kunci Layar</a></li>
+                    <li><a class="dropdown-item py-2" href="{{ route('admin.akun-saya') }}"><i class="fas fa-user me-2 text-primary"></i>Akun Saya</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('portal.logout') }}">
@@ -452,21 +450,6 @@
             </a>
 
             <div class="nav-section-label">Manajemen</div>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.pesanan*') ? 'active' : '' }}">
-                <i class="fas fa-clipboard-list"></i> Pesanan
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.layanan*') ? 'active' : '' }}">
-                <i class="fas fa-leaf"></i> Layanan
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.proyek*') ? 'active' : '' }}">
-                <i class="fas fa-project-diagram"></i> Proyek
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.tim*') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> Tim
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.testimonial*') ? 'active' : '' }}">
-                <i class="fas fa-star"></i> Testimoni
-            </a>
             <a href="{{ route('admin.kelola-user') }}" class="nav-link {{ request()->routeIs('admin.kelola-user*') ? 'active' : '' }}">
                 <i class="fas fa-user-cog"></i> Kelola User
             </a>
@@ -474,9 +457,6 @@
             <div class="nav-section-label">Laporan & Sistem</div>
             <a href="#" class="nav-link {{ request()->routeIs('admin.laporan*') ? 'active' : '' }}">
                 <i class="fas fa-chart-bar"></i> Laporan
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.pengaturan*') ? 'active' : '' }}">
-                <i class="fas fa-cog"></i> Pengaturan
             </a>
         </nav>
     </aside>

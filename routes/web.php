@@ -53,6 +53,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
         return view('admin.dashboard');
     })->name('dashboard');
 
+    Route::get('/akun-saya', function () {
+        return view('admin.akun-saya');
+    })->name('akun-saya');
+
     Route::get('/kelola-user', [App\Http\Controllers\UserController::class, 'index'])->name('kelola-user');
     Route::post('/kelola-user', [App\Http\Controllers\UserController::class, 'store'])->name('kelola-user.store');
     Route::put('/kelola-user/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('kelola-user.update');
