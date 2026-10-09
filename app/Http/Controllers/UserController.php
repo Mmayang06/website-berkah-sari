@@ -40,7 +40,6 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required|string|max:50|unique:users,username',
             'role'     => 'required|in:admin,pengurus,petugas',
-            'status'   => 'required|in:aktif,nonaktif',
             'password' => 'required|string|min:6|confirmed',
         ], [
             'username.required'  => 'Username wajib diisi.',
@@ -53,7 +52,7 @@ class UserController extends Controller
             'name'     => $request->username,
             'username' => $request->username,
             'role'     => $request->role,
-            'status'   => $request->status,
+            'status'   => 'aktif',
             'password' => $request->password,
         ]);
 
@@ -65,7 +64,6 @@ class UserController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:50', Rule::unique('users', 'username')->ignore($user->id)],
             'role'     => 'required|in:admin,pengurus,petugas',
-            'status'   => 'required|in:aktif,nonaktif',
             'password' => 'nullable|string|min:6',
         ], [
             'username.unique' => 'Username sudah dipakai user lain.',
@@ -75,7 +73,6 @@ class UserController extends Controller
             'name'     => $request->username,
             'username' => $request->username,
             'role'     => $request->role,
-            'status'   => $request->status,
         ];
 
         if ($request->filled('password')) {

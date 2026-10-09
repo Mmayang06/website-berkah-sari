@@ -207,7 +207,7 @@
                     @csrf
                     <div class="row g-3">
 
-                        <div class="col-12">
+                        <div class="col-sm-6">
                             <div class="form-floating">
                                 <input type="text" name="username" id="tambahUsername"
                                     class="form-control bg-white border-0"
@@ -228,16 +228,6 @@
                                     <option value="petugas" {{ old('role') == 'petugas' ? 'selected' : '' }}>Petugas Input</option>
                                 </select>
                                 <label for="tambahRole">Role</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-floating">
-                                <select name="status" id="tambahStatus"
-                                    class="form-select bg-white border-0">
-                                    <option value="aktif">Aktif</option>
-                                    <option value="nonaktif">Nonaktif</option>
-                                </select>
-                                <label for="tambahStatus">Status</label>
                             </div>
                         </div>
 
@@ -288,22 +278,13 @@
                         <label class="form-label small fw-bold">Username</label>
                         <input type="text" name="username" id="editUsername" class="form-control form-control-sm" required>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label small fw-bold">Role</label>
-                            <select name="role" id="editRole" class="form-select form-select-sm" required>
-                                <option value="admin">Admin</option>
-                                <option value="pengurus">Pengurus</option>
-                                <option value="petugas">Petugas Input</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label small fw-bold">Status</label>
-                            <select name="status" id="editStatus" class="form-select form-select-sm">
-                                <option value="aktif">Aktif</option>
-                                <option value="nonaktif">Nonaktif</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Role</label>
+                        <select name="role" id="editRole" class="form-select form-select-sm" required>
+                            <option value="admin">Admin</option>
+                            <option value="pengurus">Pengurus</option>
+                            <option value="petugas">Petugas Input</option>
+                        </select>
                     </div>
                     <div class="border-top pt-2 mt-1">
                         <small class="text-muted d-block mb-2">Kosongkan jika tidak ingin mengganti password</small>
@@ -350,7 +331,6 @@
 
             document.getElementById('editUsername').value = this.dataset.username;
             document.getElementById('editRole').value = this.dataset.role;
-            document.getElementById('editStatus').value = this.dataset.status;
 
             var baseUrl = "{{ url('admin/kelola-user') }}";
             document.getElementById('formEditUser').action = baseUrl + '/' + id;
