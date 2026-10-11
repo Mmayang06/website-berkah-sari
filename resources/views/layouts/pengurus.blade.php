@@ -358,14 +358,10 @@
 
 <body>
 
-    <!-- ==================== STRIP HIJAU TUA ==================== -->
     <div style="background-color: var(--dark); height: 35px; width: 100%;"></div>
 
-        <!-- TOPBAR -->
     <header class="admin-topbar">
-        <!-- Kiri: Toggle Sidebar + Brand -->
         <div class="topbar-left">
-            <!-- Toggle sidebar -->
             <button class="topbar-toggle" id="adminSidebarToggle"
                 onclick="document.getElementById('adminSidebar').classList.toggle('show')">
                 <i class="fas fa-bars fs-5"></i>
@@ -373,19 +369,13 @@
             <a href="{{ route('admin.dashboard') }}" class="topbar-brand">
                 <h1>Berkah Sari</h1>
             </a>
-            <!-- Search Bar -->
             <div class="topbar-search d-none d-md-flex">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Cari sesuatu..." id="adminSearchInput">
             </div>
         </div>
 
-        <!-- Kanan: Notifikasi, User, Lihat Website -->
         <div class="topbar-right">
-
-
-
-            <!-- Notifikasi -->
             <div class="dropdown">
                 <button class="topbar-icon-btn" id="btnNotifications" data-bs-toggle="dropdown" title="Notifikasi">
                     <i class="fas fa-bell"></i>
@@ -423,7 +413,6 @@
                 </div>
             </div>
 
-            <!-- Akun (kotak hijau) — profil dipindahkan ke dalam -->
             <div class="dropdown h-100">
                 <div class="topbar-btn d-none d-lg-flex h-100" data-bs-toggle="dropdown" id="profileDropdown"
                     style="gap:12px;cursor:pointer;">
@@ -449,7 +438,6 @@
         </div>
     </header>
 
-    <!-- SIDEBAR -->
     <aside class="admin-sidebar" id="adminSidebar">
         <nav class="sidebar-nav">
             <div class="nav-section-label">Utama</div>
@@ -478,7 +466,6 @@
         </nav>
     </aside>
 
-    <!-- MAIN -->
     <div class="admin-main">
 
 
