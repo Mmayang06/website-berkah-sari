@@ -446,6 +446,9 @@
             </a>
 
             <div class="nav-section-label">Manajemen</div>
+            <a href="#" class="nav-link {{ request()->routeIs('admin.pengumuman*') ? 'active' : '' }}">
+                <i class="fas fa-bullhorn"></i> Pengumuman Umat
+            </a>
             <a href="#" class="nav-link {{ request()->routeIs('admin.pesanan*') ? 'active' : '' }}">
                 <i class="fas fa-truck"></i> Pengepul
             </a>
