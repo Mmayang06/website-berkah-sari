@@ -75,9 +75,7 @@ Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])
 
 // pengurus
 Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pengurus.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\PengurusDashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/akun-saya', function () {
         return view('pengurus.akun-saya');
