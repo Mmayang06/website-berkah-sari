@@ -36,7 +36,6 @@ class PengurusDashboardController extends Controller
 
         return view('pengurus.dashboard', compact(
             'koleksi',
-            'keuangan',
             'setoran_terbaru'
         ));
     }

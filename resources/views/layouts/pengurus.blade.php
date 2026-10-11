@@ -459,30 +459,21 @@
 
             <div class="nav-section-label">Manajemen</div>
             <a href="#" class="nav-link {{ request()->routeIs('admin.pesanan*') ? 'active' : '' }}">
-                <i class="fas fa-clipboard-list"></i> Pesanan
+                <i class="fas fa-truck"></i> Pengepul
             </a>
             <a href="#" class="nav-link {{ request()->routeIs('admin.layanan*') ? 'active' : '' }}">
-                <i class="fas fa-leaf"></i> Layanan
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.proyek*') ? 'active' : '' }}">
-                <i class="fas fa-project-diagram"></i> Proyek
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.tim*') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> Tim
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.testimonial*') ? 'active' : '' }}">
-                <i class="fas fa-star"></i> Testimoni
+                <i class="fas fa-recycle"></i> Kategori Sampah
             </a>
 
-            <div class="nav-section-label">Laporan & Sistem</div>
+            <div class="nav-section-label">Laporan</div>
             <a href="#" class="nav-link {{ request()->routeIs('admin.laporan*') ? 'active' : '' }}">
-                <i class="fas fa-chart-bar"></i> Laporan
+                <i class="fas fa-chart-bar"></i> Laporan Bank Sampah
             </a>
             <a href="{{ route('admin.kelola-user') }}" class="nav-link {{ request()->routeIs('admin.kelola-user*') ? 'active' : '' }}">
-                <i class="fas fa-user-cog"></i> Kelola User
+                <i class="fas fa-chart-bar"></i> Laporan Minyak Jelantah
             </a>
             <a href="#" class="nav-link {{ request()->routeIs('admin.pengaturan*') ? 'active' : '' }}">
-                <i class="fas fa-cog"></i> Pengaturan
+                <i class="fas fa-clipboard-list"></i> Laporan Operasional
             </a>
         </nav>
     </aside>
