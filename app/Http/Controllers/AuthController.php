@@ -48,7 +48,8 @@ class AuthController extends Controller
         return match (strtolower((string) $role)) {
             'admin' => 'admin.dashboard',
             'pengurus' => 'pengurus.dashboard',
-            default => 'petugas.dashboard',
+            'petugas' => 'petugas.pilih',
+            default => 'petugas.pilih',
         };
     }
 }

@@ -67,6 +67,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
 // petugas input
 Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('petugas.pilih');
+    });
+
+    Route::get('/pilih-input', function () {
+        return view('petugas_input.pilih');
+    })->name('pilih');
+
     Route::get('/dashboard', function () {
         return view('petugas_input.dashboard');
     })->name('dashboard');
