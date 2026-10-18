@@ -92,6 +92,10 @@ Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus
     Route::put('/akun-saya/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('akun-saya.update');
 
     // Manajemen
+    Route::get('/pengepul', function () {
+        return view('pengurus.pengepul');
+    })->name('pengepul');
+
     Route::get('/kategori-sampah', function () {
         return view('pengurus.kategori_sampah');
     })->name('kategori-sampah');

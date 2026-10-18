@@ -449,7 +449,7 @@
             <a href="#" class="nav-link {{ request()->routeIs('pengurus.pengumuman*') ? 'active' : '' }}">
                 <i class="fas fa-bullhorn"></i> Pengumuman Umat
             </a>
-            <a href="#" class="nav-link {{ request()->routeIs('pengurus.pesanan*') ? 'active' : '' }}">
+            <a href="{{ route('pengurus.pengepul') }}" class="nav-link {{ request()->routeIs('pengurus.pengepul*') ? 'active' : '' }}">
                 <i class="fas fa-truck"></i> Pengepul
             </a>
             <a href="{{ route('pengurus.kategori-sampah') }}" class="nav-link {{ request()->routeIs('pengurus.kategori-sampah*') ? 'active' : '' }}">
