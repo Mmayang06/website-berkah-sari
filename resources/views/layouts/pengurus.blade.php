@@ -452,7 +452,7 @@
             <a href="#" class="nav-link {{ request()->routeIs('pengurus.pesanan*') ? 'active' : '' }}">
                 <i class="fas fa-truck"></i> Pengepul
             </a>
-            <a href="#" class="nav-link {{ request()->routeIs('pengurus.layanan*') ? 'active' : '' }}">
+            <a href="{{ route('pengurus.kategori-sampah') }}" class="nav-link {{ request()->routeIs('pengurus.kategori-sampah*') ? 'active' : '' }}">
                 <i class="fas fa-recycle"></i> Kategori Sampah
             </a>
 
