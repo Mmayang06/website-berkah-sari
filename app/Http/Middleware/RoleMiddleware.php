@@ -10,7 +10,20 @@ class RoleMiddleware
 {
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        if (! $request->user() || ! in_array(strtolower($request->user()->role), $roles, true)) {
+        $user = $request->user();
+        if (! $user) {
+            abort(403, 'Anda tidak punya akses ke halaman ini.');
+        }
+
+        $userRole = strtolower(trim((string) $user->role));
+        $allowedRoles = [];
+        foreach ($roles as $role) {
+            foreach (explode(',', $role) as $r) {
+                $allowedRoles[] = strtolower(trim($r));
+            }
+        }
+
+        if (! in_array($userRole, $allowedRoles, true)) {
             abort(403, 'Anda tidak punya akses ke halaman ini.');
         }
 

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.ketua')
 
 @section('title', 'Dashboard Admin - Berkah Sari')
 @section('page-title', 'Dashboard')
@@ -276,8 +276,8 @@
 @section('content')
 
 <div class="mb-4">
-    <h5 style="font-family:'Jost',sans-serif;font-weight:700;color:var(--dark);margin:0 0 4px;">Selamat Datang, Admin! 👋</h5>
-    <p style="color:var(--secondary);font-size:0.875rem;margin:0;">Ringkasan data Berkah Sari — {{ now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
+    <h5 style="font-family:'Jost',sans-serif;font-weight:700;color:var(--dark);margin:0 0 4px;">Selamat Datang, Admin! ðŸ‘‹</h5>
+    <p style="color:var(--secondary);font-size:0.875rem;margin:0;">Ringkasan data Berkah Sari â€” {{ now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
 </div>
 <div class="row g-4 mb-4">
     <div class="col-sm-6 col-xl-3">
@@ -286,7 +286,7 @@
             <div>
                 <div class="stat-number">128</div>
                 <div class="stat-label">Total Pesanan</div>
-                <div class="stat-change"><span class="up">▲ 12%</span> dari bulan lalu</div>
+                <div class="stat-change"><span class="up">â–² 12%</span> dari bulan lalu</div>
             </div>
         </div>
     </div>
@@ -296,7 +296,7 @@
             <div>
                 <div class="stat-number">45</div>
                 <div class="stat-label">Proyek Aktif</div>
-                <div class="stat-change"><span class="up">▲ 5%</span> dari bulan lalu</div>
+                <div class="stat-change"><span class="up">â–² 5%</span> dari bulan lalu</div>
             </div>
         </div>
     </div>
@@ -306,7 +306,7 @@
             <div>
                 <div class="stat-number">1.2K</div>
                 <div class="stat-label">Total Klien</div>
-                <div class="stat-change"><span class="up">▲ 8%</span> dari bulan lalu</div>
+                <div class="stat-change"><span class="up">â–² 8%</span> dari bulan lalu</div>
             </div>
         </div>
     </div>
@@ -316,7 +316,7 @@
             <div>
                 <div class="stat-number">85Jt</div>
                 <div class="stat-label">Pendapatan Bulan Ini</div>
-                <div class="stat-change"><span class="down">▼ 3%</span> dari bulan lalu</div>
+                <div class="stat-change"><span class="down">â–¼ 3%</span> dari bulan lalu</div>
             </div>
         </div>
     </div>
@@ -467,3 +467,4 @@
 </div>
 
 @endsection
+

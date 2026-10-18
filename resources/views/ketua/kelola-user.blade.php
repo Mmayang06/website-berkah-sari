@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.ketua')
 
 @section('title', 'Kelola User - Admin Berkah Sari')
 @section('page-title', 'Kelola User')
@@ -32,7 +32,7 @@
 <div class="section-card mb-4">
     <div class="p-3 border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
         <div class="d-flex align-items-center gap-2 flex-grow-1" style="max-width: 480px;">
-            <form method="GET" action="{{ route('admin.kelola-user') }}" id="formFilter" class="d-flex gap-2 w-100">
+            <form method="GET" action="{{ route('ketua.kelola-user') }}" id="formFilter" class="d-flex gap-2 w-100">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text bg-white text-muted border-end-0"><i class="fas fa-search"></i></span>
                     <input type="text" name="cari" id="cariUser" class="form-control border-start-0"
@@ -43,7 +43,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-2 flex-wrap">
-            <form method="GET" action="{{ route('admin.kelola-user') }}" id="formFilterDropdown">
+            <form method="GET" action="{{ route('ketua.kelola-user') }}" id="formFilterDropdown">
                 @if(request('cari'))
                     <input type="hidden" name="cari" value="{{ request('cari') }}">
                 @endif
@@ -133,7 +133,7 @@
                                 <i class="fas fa-pencil-alt text-primary"></i>
                             </button>
 
-                            <form method="POST" action="{{ route('admin.kelola-user.toggle-status', $user) }}" style="display:inline;">
+                            <form method="POST" action="{{ route('ketua.kelola-user.toggle-status', $user) }}" style="display:inline;">
                                 @csrf @method('PATCH')
                                 <button type="submit" class="btn btn-sm btn-light border py-1 px-2"
                                     title="{{ $user->status == 'aktif' ? 'Nonaktifkan' : 'Aktifkan' }}">
@@ -203,7 +203,7 @@
                     Tambah User Baru
                 </h4>
 
-                <form method="POST" action="{{ route('admin.kelola-user.store') }}">
+                <form method="POST" action="{{ route('ketua.kelola-user.store') }}">
                     @csrf
                     <div class="row g-3">
 
@@ -332,7 +332,7 @@
             document.getElementById('editUsername').value = this.dataset.username;
             document.getElementById('editRole').value = this.dataset.role;
 
-            var baseUrl = "{{ url('admin/kelola-user') }}";
+            var baseUrl = "{{ url('ketua/kelola-user') }}";
             document.getElementById('formEditUser').action = baseUrl + '/' + id;
 
             new bootstrap.Modal(document.getElementById('modalEditUser')).show();
@@ -346,7 +346,7 @@
 
             document.getElementById('hapusUsername').innerText = username;
 
-            var baseUrl = "{{ url('admin/kelola-user') }}";
+            var baseUrl = "{{ url('ketua/kelola-user') }}";
             document.getElementById('formHapusUser').action = baseUrl + '/' + id;
 
             new bootstrap.Modal(document.getElementById('modalHapusUser')).show();
@@ -369,3 +369,4 @@
     @endif
 </script>
 @endpush
+

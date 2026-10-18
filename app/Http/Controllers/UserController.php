@@ -32,14 +32,14 @@ class UserController extends Controller
 
         $users = $query->orderBy('created_at', 'asc')->paginate(10)->withQueryString();
 
-        return view('admin.kelola-user', compact('users'));
+        return view('ketua.kelola-user', compact('users'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'username' => 'required|string|max:50|unique:users,username',
-            'role'     => 'required|in:admin,pengurus,petugas',
+            'role'     => 'required|in:admin,ketua,pengurus,petugas',
             'password' => 'required|string|min:6|confirmed',
         ], [
             'username.required'  => 'Username wajib diisi.',
@@ -63,7 +63,7 @@ class UserController extends Controller
     {
         $request->validate([
             'username' => ['required', 'string', 'max:50', Rule::unique('users', 'username')->ignore($user->id)],
-            'role'     => 'required|in:admin,pengurus,petugas',
+            'role'     => 'required|in:admin,ketua,pengurus,petugas',
             'password' => 'nullable|string|min:6',
         ], [
             'username.unique' => 'Username sudah dipakai user lain.',

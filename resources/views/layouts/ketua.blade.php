@@ -366,7 +366,7 @@
                 onclick="document.getElementById('adminSidebar').classList.toggle('show')">
                 <i class="fas fa-bars fs-5"></i>
             </button>
-            <a href="{{ route('admin.dashboard') }}" class="topbar-brand">
+            <a href="{{ route('ketua.dashboard') }}" class="topbar-brand">
                 <h1>Berkah Sari</h1>
             </a>
             <div class="topbar-search d-none d-md-flex">
@@ -428,7 +428,7 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
                     <li><div class="px-4 py-2" style="font-size:0.7rem;font-weight:600;color:#a8c4aa;letter-spacing:1px;">SELAMAT DATANG!</div></li>
-                    <li><a class="dropdown-item py-2" href="{{ route('admin.akun-saya') }}"><i class="fas fa-user me-2 text-primary"></i>Akun Saya</a></li>
+                    <li><a class="dropdown-item py-2" href="{{ route('ketua.akun-saya') }}"><i class="fas fa-user me-2 text-primary"></i>Akun Saya</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('portal.logout') }}">
@@ -445,18 +445,24 @@
     <aside class="admin-sidebar" id="adminSidebar">
         <nav class="sidebar-nav">
             <div class="nav-section-label">Utama</div>
-            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <a href="{{ route('ketua.dashboard') }}" class="nav-link {{ request()->routeIs('ketua.dashboard') ? 'active' : '' }}">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
 
             <div class="nav-section-label">Manajemen</div>
-            <a href="{{ route('admin.kelola-user') }}" class="nav-link {{ request()->routeIs('admin.kelola-user*') ? 'active' : '' }}">
+            <a href="{{ route('ketua.kelola-user') }}" class="nav-link {{ request()->routeIs('ketua.kelola-user*') ? 'active' : '' }}">
                 <i class="fas fa-user-cog"></i> Kelola User
             </a>
 
             <div class="nav-section-label">Laporan & Sistem</div>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.laporan*') ? 'active' : '' }}">
-                <i class="fas fa-chart-bar"></i> Laporan
+            <a href="{{ route('pengurus.laporan-bank-sampah') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-bank-sampah') ? 'active' : '' }}">
+                <i class="fas fa-chart-bar"></i> Laporan Bank Sampah
+            </a>
+            <a href="{{ route('pengurus.laporan-minyak-jelantah') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-minyak-jelantah') ? 'active' : '' }}">
+                <i class="fas fa-chart-bar"></i> Laporan Minyak Jelantah
+            </a>
+            <a href="{{ route('pengurus.laporan-operasional') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-operasional') ? 'active' : '' }}">
+                <i class="fas fa-clipboard-list"></i> Laporan Operasional
             </a>
         </nav>
     </aside>
@@ -480,3 +486,5 @@
 </body>
 
 </html>
+
+

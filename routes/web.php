@@ -40,21 +40,21 @@ Route::get('/contact', function () {
 })->name('contact');
 
 
-// portal login (admin, pengurus, petugas)
+// portal login (ketua, pengurus, petugas)
 Route::get('/portal-pengurus', [AuthController::class, 'showLogin'])->name('portal.login');
 Route::post('/portal-pengurus', [AuthController::class, 'login'])->name('portal.login.submit');
 Route::post('/portal-pengurus/logout', [AuthController::class, 'logout'])
     ->middleware('auth')->name('portal.logout');
 
 
-// admin
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+// ketua (formerly admin)
+Route::prefix('ketua')->name('ketua.')->middleware(['auth', 'role:admin,ketua'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        return view('ketua.dashboard');
     })->name('dashboard');
 
     Route::get('/akun-saya', function () {
-        return view('admin.akun-saya');
+        return view('ketua.akun-saya');
     })->name('akun-saya');
 
     Route::get('/kelola-user', [App\Http\Controllers\UserController::class, 'index'])->name('kelola-user');
@@ -67,6 +67,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
 // petugas input
 Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('petugas.pilih');
+    });
+
+    Route::get('/pilih-input', function () {
+        return view('petugas_input.pilih');
+    })->name('pilih');
+
     Route::get('/dashboard', function () {
         return view('petugas_input.dashboard');
     })->name('dashboard');
@@ -74,7 +82,7 @@ Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])
 
 
 // pengurus
-Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus'])->group(function () {
+Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus,ketua,admin'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\PengurusDashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/akun-saya', function () {
@@ -82,7 +90,17 @@ Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus
     })->name('akun-saya');
 
     Route::put('/akun-saya/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('akun-saya.update');
+
+    // Laporan
+    Route::get('/laporan-bank-sampah', function () {
+        return view('pengurus.laporan-bank-sampah');
+    })->name('laporan-bank-sampah');
+
+    Route::get('/laporan-minyak-jelantah', function () {
+        return view('pengurus.laporan-minyak-jelantah');
+    })->name('laporan-minyak-jelantah');
+
+    Route::get('/laporan-operasional', function () {
+        return view('pengurus.laporan-operasional');
+    })->name('laporan-operasional');
 });
-
-
-

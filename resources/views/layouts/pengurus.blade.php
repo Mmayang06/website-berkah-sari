@@ -366,7 +366,7 @@
                 onclick="document.getElementById('adminSidebar').classList.toggle('show')">
                 <i class="fas fa-bars fs-5"></i>
             </button>
-            <a href="{{ route('admin.dashboard') }}" class="topbar-brand">
+            <a href="{{ route('pengurus.dashboard') }}" class="topbar-brand">
                 <h1>Berkah Sari</h1>
             </a>
             <div class="topbar-search d-none d-md-flex">
@@ -446,24 +446,24 @@
             </a>
 
             <div class="nav-section-label">Manajemen</div>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.pengumuman*') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('pengurus.pengumuman*') ? 'active' : '' }}">
                 <i class="fas fa-bullhorn"></i> Pengumuman Umat
             </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.pesanan*') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('pengurus.pesanan*') ? 'active' : '' }}">
                 <i class="fas fa-truck"></i> Pengepul
             </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.layanan*') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('pengurus.layanan*') ? 'active' : '' }}">
                 <i class="fas fa-recycle"></i> Kategori Sampah
             </a>
 
             <div class="nav-section-label">Laporan</div>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.laporan*') ? 'active' : '' }}">
+            <a href="{{ route('pengurus.laporan-bank-sampah') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-bank-sampah') ? 'active' : '' }}">
                 <i class="fas fa-chart-bar"></i> Laporan Bank Sampah
             </a>
-            <a href="{{ route('admin.kelola-user') }}" class="nav-link {{ request()->routeIs('admin.kelola-user*') ? 'active' : '' }}">
+            <a href="{{ route('pengurus.laporan-minyak-jelantah') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-minyak-jelantah') ? 'active' : '' }}">
                 <i class="fas fa-chart-bar"></i> Laporan Minyak Jelantah
             </a>
-            <a href="#" class="nav-link {{ request()->routeIs('admin.pengaturan*') ? 'active' : '' }}">
+            <a href="{{ route('pengurus.laporan-operasional') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-operasional') ? 'active' : '' }}">
                 <i class="fas fa-clipboard-list"></i> Laporan Operasional
             </a>
         </nav>

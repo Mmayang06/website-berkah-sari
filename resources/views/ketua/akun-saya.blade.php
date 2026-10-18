@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.ketua')
 
 @section('title', 'Akun Saya - Admin')
 
@@ -19,7 +19,7 @@
     <div class="card border-0 shadow-sm" style="border-radius:12px;">
         <div class="card-body p-0">
             
-            <form action="{{ route('admin.kelola-user.update', auth()->user()->id) }}" method="POST" class="p-4 p-md-5">
+            <form action="{{ route('ketua.kelola-user.update', auth()->user()->id) }}" method="POST" class="p-4 p-md-5">
                 @csrf
                 @method('PUT')
                 
@@ -103,3 +103,4 @@
     
 </div>
 @endsection
+

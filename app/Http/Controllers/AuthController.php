@@ -46,7 +46,7 @@ class AuthController extends Controller
     private function dashboardRoute(?string $role): string
     {
         return match (strtolower((string) $role)) {
-            'admin' => 'admin.dashboard',
+            'admin', 'ketua' => 'ketua.dashboard',
             'pengurus' => 'pengurus.dashboard',
             default => 'petugas.dashboard',
         };
