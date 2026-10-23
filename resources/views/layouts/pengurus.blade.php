@@ -450,7 +450,7 @@
                 <i class="fas fa-bullhorn"></i> Pengumuman Umat
             </a>
             <a href="{{ route('pengurus.pengepul') }}" class="nav-link {{ request()->routeIs('pengurus.pengepul*') ? 'active' : '' }}">
-                <i class="fas fa-truck"></i> Pengepul
+                <i class="fas fa-truck"></i>Bank Sampah Induk
             </a>
             <a href="{{ route('pengurus.kategori-sampah') }}" class="nav-link {{ request()->routeIs('pengurus.kategori-sampah*') ? 'active' : '' }}">
                 <i class="fas fa-recycle"></i> Kategori Sampah

@@ -1,7 +1,16 @@
 @extends('layouts.petugas_input')
 
-@section('title', 'Dashboard Petugas - Berkah Sari')
-@section('page-title', 'Dashboard')
+@section('title', 'Dashboard Minyak Jelantah - Berkah Sari')
+@section('brand_title', 'Berkah Sari Minyak Jelantah')
+@section('page-title', 'Dashboard Minyak Jelantah')
+
+@section('topbar_action')
+    <a href="{{ route('petugas.dashboard_bs') }}" class="btn-switch-module" title="Switch ke Bank Sampah">
+        <i class="fas fa-recycle icon-module"></i>
+        <span>Pinah ke Bank Sampah</span>
+        <i class="fas fa-exchange-alt ms-1 text-muted" style="font-size:0.75rem;"></i>
+    </a>
+@endsection
 
 @push('styles')
 <style>

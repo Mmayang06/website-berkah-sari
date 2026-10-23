@@ -76,8 +76,16 @@ Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])
     })->name('pilih');
 
     Route::get('/dashboard', function () {
-        return view('petugas_input.dashboard');
+        return redirect()->route('petugas.pilih');
     })->name('dashboard');
+
+    Route::get('/dashboard-bs', function () {
+        return view('petugas_input.dashboard_bs');
+    })->name('dashboard_bs');
+
+    Route::get('/dashboard-mijel', function () {
+        return view('petugas_input.dashboard_mijel');
+    })->name('dashboard_mijel');
 });
 
 

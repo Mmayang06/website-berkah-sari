@@ -70,45 +70,40 @@
             margin: 0;
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 2.2rem;
+            font-size: 1.5rem;
+            white-space: nowrap;
         }
 
-        /* Sidebar toggle button */
-        .topbar-toggle {
-            height: 100%;
-            display: flex;
+        /* Switch module button */
+        .btn-switch-module {
+            display: inline-flex;
             align-items: center;
-            padding: 0 16px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--dark);
-            transition: .3s;
-        }
-        .topbar-toggle:hover { color: var(--primary); }
-
-        /* Search bar */
-        .topbar-search {
-            display: flex;
-            align-items: center;
+            gap: 9px;
             background: var(--light);
+            color: var(--dark);
+            border: 1.5px solid #c8e6c9;
             border-radius: 50px;
-            padding: 6px 16px;
-            gap: 8px;
-            min-width: 260px;
+            padding: 7px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
             margin: 0 10px;
         }
-        .topbar-search input {
-            border: none;
-            background: transparent;
-            outline: none;
-            font-size: 0.875rem;
-            color: var(--dark);
-            width: 100%;
-            font-family: 'Open Sans', sans-serif;
+        .btn-switch-module i.icon-module {
+            color: var(--primary);
+            font-size: 1rem;
         }
-        .topbar-search input::placeholder { color: #a8c4aa; }
-        .topbar-search i { color: var(--primary); font-size: 0.9rem; }
+        .btn-switch-module:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 14px rgba(52, 142, 56, 0.25);
+            transform: translateY(-1px);
+        }
+        .btn-switch-module:hover i {
+            color: #ffffff !important;
+        }
 
         .topbar-right {
             display: flex;
@@ -311,7 +306,7 @@
 
         /* MAIN CONTENT */
         .petugas-main {
-            margin-left: var(--sidebar-width);
+            margin-left: 0;
             min-height: calc(100vh - 80px);
             display: flex;
             flex-direction: column;
@@ -365,18 +360,10 @@
     <!-- TOPBAR -->
     <header class="petugas-topbar">
         <div class="topbar-left">
-            <button class="topbar-toggle" id="petugasSidebarToggle"
-                onclick="document.getElementById('petugasSidebar').classList.toggle('show')">
-                <i class="fas fa-bars fs-5"></i>
-            </button>
-            <a href="{{ route('petugas.dashboard') }}" class="topbar-brand">
-                <h1>Berkah Sari</h1>
+            <a href="{{ route('petugas.pilih') }}" class="topbar-brand" title="Pilih Menu Input">
+                <h1>@yield('brand_title', 'Berkah Sari')</h1>
             </a>
-            <!-- Search Bar -->
-            <div class="topbar-search d-none d-md-flex">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Cari sesuatu..." id="petugasSearchInput">
-            </div>
+            @yield('topbar_action')
         </div>
 
         <div class="topbar-right">
@@ -427,8 +414,7 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
                     <li><div class="px-4 py-2" style="font-size:0.7rem;font-weight:600;color:#a8c4aa;letter-spacing:1px;">SELAMAT DATANG!</div></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-user me-2 text-primary"></i>Profil Saya</a></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-lock me-2 text-primary"></i>Kunci Layar</a></li>
+                    <li><a class="dropdown-item py-2" href="{{ route('petugas.pilih') }}"><i class="fas fa-th-large me-2 text-primary"></i>Pilih Menu Input</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('portal.logout') }}">
@@ -440,35 +426,6 @@
             </div>
         </div>
     </header>
-
-    <!-- SIDEBAR -->
-    <aside class="petugas-sidebar" id="petugasSidebar">
-        <nav class="sidebar-nav">
-            <div class="nav-section-label">Utama</div>
-            <a href="{{ route('petugas.dashboard') }}" class="nav-link {{ request()->routeIs('petugas.dashboard') ? 'active' : '' }}">
-                <i class="fas fa-home"></i> Dashboard
-            </a>
-
-            <div class="nav-section-label">Input Data</div>
-            <a href="#" class="nav-link {{ request()->routeIs('petugas.pesanan*') ? 'active' : '' }}">
-                <i class="fas fa-plus-circle"></i> Input Pesanan
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('petugas.proyek*') ? 'active' : '' }}">
-                <i class="fas fa-hard-hat"></i> Input Proyek
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('petugas.klien*') ? 'active' : '' }}">
-                <i class="fas fa-user-plus"></i> Input Klien
-            </a>
-
-            <div class="nav-section-label">Riwayat</div>
-            <a href="#" class="nav-link {{ request()->routeIs('petugas.riwayat*') ? 'active' : '' }}">
-                <i class="fas fa-history"></i> Riwayat Input
-            </a>
-            <a href="#" class="nav-link {{ request()->routeIs('petugas.laporan*') ? 'active' : '' }}">
-                <i class="fas fa-file-alt"></i> Laporan Saya
-            </a>
-        </nav>
-    </aside>
 
     <!-- MAIN -->
     <div class="petugas-main">
