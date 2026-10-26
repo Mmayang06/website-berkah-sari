@@ -446,9 +446,6 @@
             </a>
 
             <div class="nav-section-label">Manajemen</div>
-            <a href="#" class="nav-link {{ request()->routeIs('pengurus.pengumuman*') ? 'active' : '' }}">
-                <i class="fas fa-bullhorn"></i> Pengumuman Umat
-            </a>
             <a href="{{ route('pengurus.pengepul') }}" class="nav-link {{ request()->routeIs('pengurus.pengepul*') ? 'active' : '' }}">
                 <i class="fas fa-truck"></i>Bank Sampah Induk
             </a>
