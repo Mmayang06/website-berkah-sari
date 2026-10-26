@@ -148,7 +148,7 @@
                             </div>
                             <h4 class="mb-3">Bank Sampah Bersinar</h4>
                             <p class="mb-4">Jl. Terusan Bojongsoang No. 174A, Bandung</p>
-                            <a class="btn btn-sm" href="{{ route('quote') }}">Lihat</a>
+                            <a class="btn btn-sm" href="{{ route('pengurus.katalog', 1) }}">Lihat</a>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                             </div>
                             <h4 class="mb-3">Great Bandung</h4>
                             <p class="mb-4">Jl. Kalipah Apo No. 41 / Gg. Bahim No. 6, Kota Bandung</p>
-                            <a class="btn btn-sm" href="{{ route('quote') }}">Lihat</a>
+                            <a class="btn btn-sm" href="{{ route('pengurus.katalog', 3) }}">Lihat</a>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                             </div>
                             <h4 class="mb-3">Pengepul</h4>
                             <p class="mb-4">Kolektor / pegepul mitra</p>
-                            <a class="btn btn-sm" href="{{ route('quote') }}">Lihat</a>
+                            <a class="btn btn-sm" href="{{ route('pengurus.katalog', 2) }}">Lihat</a>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                             </div>
                             <h4 class="mb-3">Buyer Internal</h4>
                             <p class="mb-4">pengurus / nasabah bank sampah </p>
-                            <a class="btn btn-sm" href="{{ route('quote') }}">Lihat</a>
+                            <a class="btn btn-sm" href="{{ route('pengurus.katalog', 4) }}">Lihat</a>
                         </div>
                     </div>
                 </div>

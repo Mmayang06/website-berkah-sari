@@ -104,9 +104,60 @@ Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus
         return view('pengurus.pengepul');
     })->name('pengepul');
 
+    Route::get('/katalog/{id?}', function ($id = 1) {
+        $pengepul = DB::table('pengepul')->where('id_pengepul', $id)->first();
+        if (!$pengepul) {
+            $pengepul = DB::table('pengepul')->where('nama_pengepul', 'like', "%{$id}%")->first();
+        }
+        if (!$pengepul) {
+            $pengepul = DB::table('pengepul')->first();
+        }
+
+        $katalog = DB::table('harga_pengepul as hp')
+            ->join('kategori_sampah as k', 'hp.id_kategori', '=', 'k.id_kategori')
+            ->where('hp.id_pengepul', $pengepul->id_pengepul)
+            ->where('k.kelompok', 'Sampah')
+            ->select('hp.id_harga', 'k.jenis', 'k.satuan', 'hp.harga_jual', 'hp.periode')
+            ->orderByRaw("CASE WHEN LOWER(k.jenis) LIKE '%lainnya%' THEN 1 ELSE 0 END ASC, k.jenis ASC")
+            ->get();
+
+        $daftar_pengepul = DB::table('pengepul')->get();
+
+        return view('pengurus.katalog', compact('pengepul', 'katalog', 'daftar_pengepul'));
+    })->name('katalog');
+
     Route::get('/kategori-sampah', function () {
         return view('pengurus.kategori_sampah');
     })->name('kategori-sampah');
+
+    Route::get('/daftar-kategori/{jenis?}', function ($jenis = 'sampah') {
+        $kelompok = ($jenis === 'minyak-jelantah') ? 'Minyak Jelantah' : 'Sampah';
+        $title_kategori = ($kelompok === 'Minyak Jelantah') ? 'Minyak Jelantah' : 'Bank Sampah';
+
+        $kategori = DB::table('kategori_sampah')
+            ->where('kelompok', $kelompok)
+            ->orderByRaw("CASE WHEN LOWER(jenis) LIKE '%lainnya%' THEN 1 ELSE 0 END ASC, jenis ASC")
+            ->get();
+
+        return view('pengurus.daftar_kategori', compact('kategori', 'kelompok', 'title_kategori', 'jenis'));
+    })->name('daftar-kategori');
+
+    Route::post('/kategori-sampah', function (Illuminate\Http\Request $request) {
+        $request->validate([
+            'kelompok' => 'required|in:Sampah,Minyak Jelantah',
+            'jenis' => 'required|string|max:100',
+            'satuan' => 'required|string|max:50',
+        ]);
+
+        DB::table('kategori_sampah')->insert([
+            'kelompok' => $request->kelompok,
+            'jenis' => $request->jenis,
+            'satuan' => $request->satuan,
+        ]);
+
+        $redirectJenis = ($request->kelompok === 'Minyak Jelantah') ? 'minyak-jelantah' : 'sampah';
+        return redirect()->route('pengurus.daftar-kategori', $redirectJenis)->with('success', 'Jenis sampah berhasil ditambahkan');
+    })->name('kategori-sampah.store');
 
     // Laporan
     Route::get('/laporan-bank-sampah', function () {
