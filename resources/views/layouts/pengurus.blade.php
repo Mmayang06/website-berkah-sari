@@ -369,10 +369,6 @@
             <a href="{{ route('pengurus.dashboard') }}" class="topbar-brand">
                 <h1>Berkah Sari</h1>
             </a>
-            <div class="topbar-search d-none d-md-flex">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Cari sesuatu..." id="adminSearchInput">
-            </div>
         </div>
 
         <div class="topbar-right">

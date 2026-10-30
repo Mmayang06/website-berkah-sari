@@ -150,9 +150,9 @@
                 </select>
             </div>
             <div class="col-sm-4 col-md-3">
-                <label class="form-label-custom" for="filter-pengepul">Nama Pengepul</label>
-                <input type="text" class="form-control-custom" name="pengepul" id="filter-pengepul"
-                    placeholder="Nama pengepul..." value="{{ request('pengepul') }}">
+                <label class="form-label-custom" for="filter-lingkungan">Lingkungan</label>
+                <input type="text" class="form-control-custom" name="lingkungan" id="filter-lingkungan"
+                    placeholder="Nama lingkungan..." value="{{ request('lingkungan') }}">
             </div>
             <div class="col-sm-12 col-md-3">
                 <div class="d-flex gap-2">
@@ -190,7 +190,7 @@
                     <th>No</th>
                     <th>Tanggal</th>
                     <th>Nama Donatur</th>
-                    <th>Pengepul</th>
+                    <th>Lingkungan</th>
                     <th>Volume (L)</th>
                     <th>Harga/Liter</th>
                     <th>Total Nilai</th>

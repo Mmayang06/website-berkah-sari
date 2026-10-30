@@ -337,52 +337,18 @@
     .table-pagination-info { font-size: .83rem; color: var(--text-muted-green); font-family: 'Plus Jakarta Sans', sans-serif; }
     .empty-ph { padding: 48px; text-align: center; color: var(--text-muted-green); font-size: .875rem; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-    /* ─── Spark Admin Premium Modal (Zero Cut-Off, Full Scrollable) ─── */
-    .spark-modal .modal-dialog {
-        max-width: 760px;
-        margin: 1.75rem auto;
+    .modal {
+        z-index: 1060 !important;
     }
-    .spark-modal .modal-content {
-        background: #FFFFFF;
-        border-radius: var(--radius-xl);
-        border: 1px solid rgba(11, 19, 15, 0.08);
-        box-shadow: 0 20px 50px rgba(5, 28, 18, 0.16);
-        overflow: hidden;
+    .modal-backdrop {
+        z-index: 1055 !important;
     }
-    .spark-modal .modal-header {
-        background: #FFFFFF;
-        padding: 1.25rem 1.75rem;
-        border-bottom: 1px solid rgba(11, 19, 15, 0.08);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .spark-modal .modal-title {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 700;
-        font-size: 1.15rem;
-        color: var(--text-main);
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin: 0;
-    }
-    .spark-modal .modal-title i {
-        color: var(--brand-forest-medium);
-        font-size: 1.25rem;
-    }
-    .spark-modal .modal-body {
+    .modal-card-custom {
+        background: #ffffff;
+        border: 1px solid rgba(15, 66, 41, 0.1);
+        border-radius: 14px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
         padding: 1.75rem;
-        background: #FFFFFF;
-    }
-    .spark-modal .modal-footer {
-        background: #F8FAF9;
-        padding: 1rem 1.75rem;
-        border-top: 1px solid rgba(11, 19, 15, 0.08);
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 0.75rem;
     }
 </style>
 @endpush
@@ -401,10 +367,10 @@
 <div class="filter-card">
     <p class="filter-card-title"><i class="fas fa-filter"></i> Filter Laporan</p>
     <form method="GET" action="{{ route('pengurus.laporan-operasional') }}">
-        <div class="row g-3 align-items-end">
+        <div class="row g-3">
             <div class="col-sm-6 col-md-3">
                 <label class="form-label-custom" for="filter-bulan">Bulan</label>
-                <select class="form-select-custom" name="bulan" id="filter-bulan">
+                <select class="form-select-custom" name="bulan" id="filter-bulan" onchange="this.form.submit()">
                     <option value="">Semua Bulan</option>
                     @foreach(range(1,12) as $m)
                         <option value="{{ $m }}" {{ request('bulan') == $m ? 'selected' : '' }}>
@@ -415,31 +381,22 @@
             </div>
             <div class="col-sm-6 col-md-3">
                 <label class="form-label-custom" for="filter-tahun">Tahun</label>
-                <select class="form-select-custom" name="tahun" id="filter-tahun">
+                <select class="form-select-custom" name="tahun" id="filter-tahun" onchange="this.form.submit()">
                     @foreach(range(now()->year, now()->year - 3) as $y)
                         <option value="{{ $y }}" {{ request('tahun', now()->year) == $y ? 'selected' : '' }}>{{ $y }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <label class="form-label-custom" for="filter-jenis">Jenis Transaksi</label>
-                <select class="form-select-custom" name="jenis" id="filter-jenis">
-                    <option value="">Semua Jenis</option>
-                    <option value="pemasukan" {{ request('jenis') == 'pemasukan' ? 'selected' : '' }}>Pemasukan</option>
-                    <option value="pengeluaran" {{ request('jenis') == 'pengeluaran' ? 'selected' : '' }}>Pengeluaran Operasional</option>
-                </select>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn-filter-custom flex-grow-1">
-                        <i class="fas fa-search"></i> Tampilkan
-                    </button>
-                    <a href="{{ route('pengurus.laporan-operasional') }}" class="btn-reset-custom">Reset</a>
-                </div>
-            </div>
         </div>
     </form>
 </div>
+
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 
 <div class="table-card-custom">
     <div class="table-header-control">
@@ -492,106 +449,45 @@
     </div>
 </div>
 
-<div class="modal fade spark-modal" id="modalTambahPengeluaran" tabindex="-1" aria-labelledby="modalTambahPengeluaranLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTambahPengeluaranLabel">
-                    <i class="bi bi-wallet2"></i> Tambah Pengeluaran Operasional
+<div class="modal fade" id="modalTambahPengeluaran" tabindex="-1" aria-labelledby="modalTambahPengeluaranLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 580px;">
+        <div class="modal-content modal-card-custom">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <h5 class="card-title mb-0 d-flex align-items-center gap-2" id="modalTambahPengeluaranLabel" style="font-family: 'Jost', sans-serif; font-size: 1.15rem; color: var(--dark); font-weight: 700;">
+                    <i class="bi bi-wallet2 text-primary fs-5"></i>
+                    <span>Tambah Pengeluaran</span>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
-                <form id="formTambahPengeluaran" method="POST" action="#">
-                    @csrf
+            <form id="formTambahPengeluaran" method="POST" action="{{ route('pengurus.laporan-operasional.store') }}">
+                @csrf
 
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <div class="mb-2">
-                                <label class="form-label-custom" for="nama_barang">
-                                    Nama Barang<span class="req">*</span>
-                                </label>
-                                <input type="text" class="form-control-custom" id="nama_barang" name="nama_barang"
-                                    placeholder="Contoh: Kantong plastik, Bahan bakar, dll" required>
-                            </div>
-                        </div>
+                <div class="mb-3">
+                    <label for="tanggal_keluar" class="form-label-custom">Tanggal Pengeluaran <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control-custom" id="tanggal_keluar" name="tanggal_keluar" value="{{ date('Y-m-d') }}" required>
+                </div>
 
-                        <div class="col-12 col-md-6">
-                            <div class="mb-2">
-                                <label class="form-label-custom" for="kategori">
-                                    Kategori Pengeluaran <span class="req">*</span>
-                                </label>
-                                <select class="form-select-custom" id="kategori" name="kategori" required>
-                                    <option value="" selected disabled>Pilih Kategori...</option>
-                                    <option value="bahan">Bahan / Material</option>
-                                    <option value="peralatan">Peralatan Operasional</option>
-                                    <option value="transportasi">Transportasi / BBM</option>
-                                    <option value="administrasi">Administrasi & ATK</option>
-                                    <option value="kebersihan">Upah / Kebersihan</option>
-                                    <option value="lainnya">Lain-lain</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-4">
-                            <div class="mb-2">
-                                <label class="form-label-custom" for="tanggal">
-                                    Tanggal Transaksi <span class="req">*</span>
-                                </label>
-                                <input type="date" class="form-control-custom" id="tanggal" name="tanggal"
-                                    value="{{ now()->format('Y-m-d') }}" required>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-4">
-                            <div class="mb-2">
-                                <label class="form-label-custom" for="jumlah">
-                                    Jumlah <span class="req">*</span>
-                                </label>
-                                <div class="input-group-custom">
-                                    <span class="input-group-text-custom"><i class="bi bi-box-seam"></i></span>
-                                    <input type="number" class="form-control-custom" id="jumlah" name="jumlah"
-                                        placeholder="1" min="1" value="1" required>
-                                    <span class="input-group-text-custom">Pcs/Unit</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-4">
-                            <div class="mb-2">
-                                <label class="form-label-custom" for="harga_satuan">
-                                    Harga Satuan <span class="req">*</span>
-                                </label>
-                                <div class="input-group-custom">
-                                    <span class="input-group-text-custom">Rp</span>
-                                    <input type="number" class="form-control-custom" id="harga_satuan" name="harga_satuan"
-                                        placeholder="0" min="0" step="500" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="mb-0">
-                                <label class="form-label-custom" for="keterangan">Keterangan</label>
-                                <textarea class="form-control-custom" id="keterangan" name="keterangan" rows="3"
-                                    placeholder="Tuliskan keterangan pembelian (opsional)"></textarea>
-                            </div>
-                        </div>
+                <div class="mb-3">
+                    <label for="biaya_keluar" class="form-label-custom">Biaya Keluar (Rp) <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text" style="border-radius: 8px 0 0 8px; border-color: rgba(15, 66, 41, 0.15); background-color: #f8faf9; font-weight: 600; color: var(--dark);">Rp</span>
+                        <input type="number" class="form-control-custom" id="biaya_keluar" name="biaya_keluar" placeholder="Contoh: 50000" min="0" step="100" required style="border-radius: 0 8px 8px 0;">
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn-custom btn-custom-light" data-bs-dismiss="modal">
-                    <i class="bi bi-x-lg"></i> Batal
-                </button>
-                <button type="button" class="btn-custom btn-custom-primary" onclick="document.getElementById('formTambahPengeluaran').submit()">
-                    <i class="bi bi-check-lg"></i> Simpan Pengeluaran
-                </button>
-            </div>
+                <div class="mb-4">
+                    <label for="keterangan" class="form-label-custom">Keterangan <span class="text-danger">*</span></label>
+                    <textarea class="form-control-custom" id="keterangan" name="keterangan" rows="3" placeholder="Tuliskan keterangan pengeluaran operasional..." required></textarea>
+                </div>
 
+                <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+                    <button type="button" class="btn-custom btn-custom-light" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn-custom btn-custom-primary">
+                        <i class="fas fa-save me-1"></i> Simpan
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -607,5 +503,17 @@
         });
     });
 
+    document.addEventListener('DOMContentLoaded', function () {
+        var btnTambah = document.getElementById('btnTambahPengeluaran');
+        var modalEl = document.getElementById('modalTambahPengeluaran');
+        
+        if (btnTambah && modalEl) {
+            btnTambah.addEventListener('click', function (e) {
+                e.preventDefault();
+                var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            });
+        }
+    });
 </script>
 @endpush

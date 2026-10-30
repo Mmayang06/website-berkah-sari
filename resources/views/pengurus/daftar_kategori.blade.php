@@ -111,24 +111,6 @@
     .table-custom tbody tr:hover {
         background: rgba(52,142,56,.025);
     }
-    .table-btn-action {
-        width: 32px;
-        height: 32px;
-        border-radius: 6px;
-        border: 1px solid rgba(15, 66, 41, 0.12);
-        background-color: #fff;
-        color: var(--dark);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        transition: all .2s;
-    }
-    .table-btn-action:hover {
-        background-color: var(--primary);
-        color: #fff;
-        border-color: var(--primary);
-    }
     .table-footer-control {
         background: #fff;
         padding: .85rem 1.25rem;
@@ -138,6 +120,90 @@
         justify-content: space-between;
         font-size: .83rem;
         color: #6C7E75;
+    }
+
+    .form-label-custom {
+        display: inline-block;
+        font-size: .85rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: .45rem;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .form-control-custom {
+        display: block;
+        width: 100%;
+        padding: .6rem 1rem;
+        font-size: .875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(15, 66, 41, 0.15);
+        border-radius: 8px;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .form-control-custom:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: var(--primary);
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(52, 142, 56, 0.15);
+    }
+    .form-control-custom::placeholder {
+        color: #8c9b93;
+        opacity: 0.8;
+    }
+
+    .modal {
+        z-index: 1060 !important;
+    }
+    .modal-backdrop {
+        z-index: 1055 !important;
+    }
+    .modal-card-custom {
+        background: #ffffff;
+        border: 1px solid rgba(15, 66, 41, 0.1);
+        border-radius: 14px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+        padding: 1.75rem;
+    }
+
+    .btn-custom {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.55rem 1.25rem;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+        cursor: pointer;
+        text-decoration: none;
+        line-height: 1.5;
+        font-family: 'Jost', sans-serif;
+    }
+    .btn-custom-primary {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+        color: #FFFFFF !important;
+    }
+    .btn-custom-primary:hover {
+        background-color: var(--dark) !important;
+        border-color: var(--dark) !important;
+    }
+    .btn-custom-light {
+        background-color: #FFFFFF;
+        border: 1px solid #dee2e6;
+        color: #6c757d;
+    }
+    .btn-custom-light:hover {
+        background-color: #f8f9fa;
+        color: #495057;
     }
 </style>
 @endpush
@@ -154,15 +220,27 @@
             <option value="{{ route('pengurus.daftar-kategori', 'sampah') }}" {{ $jenis == 'sampah' ? 'selected' : '' }}>Bank Sampah</option>
             <option value="{{ route('pengurus.daftar-kategori', 'minyak-jelantah') }}" {{ $jenis == 'minyak-jelantah' ? 'selected' : '' }}>Minyak Jelantah</option>
         </select>
-        <button type="button" class="btn-action-custom" data-bs-toggle="modal" data-bs-target="#modalTambahJenis">
+        <button type="button" class="btn-action-custom" data-bs-toggle="modal" data-bs-target="#modalTambahJenis" id="btnTambahJenis">
             <i class="fas fa-plus"></i> Tambah Jenis Sampah
         </button>
     </div>
 </div>
 
 @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show mb-3" role="alert" style="border-radius: 8px; font-size: .85rem;">
-        {{ session('success') }}
+    <div class="alert alert-success alert-dismissible fade show mb-3 shadow-sm" role="alert" style="border-radius: 8px; font-size: .85rem;">
+        <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show mb-3 shadow-sm" role="alert" style="border-radius: 8px; font-size: .85rem;">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        <ul class="mb-0 ps-3">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
@@ -185,7 +263,6 @@
                     <th style="width: 50px;">No</th>
                     <th>Jenis Sampah</th>
                     <th>Satuan</th>
-                    <th class="text-center" style="width: 70px;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -194,13 +271,10 @@
                         <td>{{ $index + 1 }}</td>
                         <td class="fw-bold text-dark">{{ $item->jenis }}</td>
                         <td>{{ $item->satuan }}</td>
-                        <td class="text-center">
-                            <a href="#" class="table-btn-action" title="Edit"><i class="bi bi-pencil"></i></a>
-                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center py-4 text-muted">
+                        <td colspan="3" class="text-center py-4 text-muted">
                             Belum ada data kategori sampah.
                         </td>
                     </tr>
@@ -215,37 +289,34 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalTambahJenis" tabindex="-1" aria-labelledby="modalTambahJenisLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
-            <div class="modal-header" style="border-bottom: 1px solid rgba(15, 66, 41, 0.08); padding: 1.25rem 1.5rem;">
-                <h5 class="modal-title fw-bold text-dark" id="modalTambahJenisLabel" style="font-family: 'Jost', sans-serif; font-size: 1.1rem;">
-                    <i class="fas fa-plus-circle text-primary me-2"></i>Tambah Jenis Sampah
+<div class="modal fade" id="modalTambahJenis" tabindex="-1" aria-labelledby="modalTambahJenisLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 580px;">
+        <div class="modal-content modal-card-custom">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <h5 class="card-title mb-0 d-flex align-items-center gap-2" id="modalTambahJenisLabel" style="font-family: 'Jost', sans-serif; font-size: 1.15rem; color: var(--dark); font-weight: 700;">
+                    <i class="fas fa-plus-circle text-primary fs-5"></i>
+                    <span>Tambah Jenis Sampah</span>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <form action="{{ route('pengurus.kategori-sampah.store') }}" method="POST">
                 @csrf
-                <div class="modal-body" style="background: #F8FAF9; padding: 1.5rem;">
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-dark mb-1">Kelompok <span class="text-danger">*</span></label>
-                        <select class="form-select" name="kelompok" required style="border-radius: 8px; font-size: .875rem;">
-                            <option value="Sampah" {{ $kelompok == 'Sampah' ? 'selected' : '' }}>Bank Sampah</option>
-                            <option value="Minyak Jelantah" {{ $kelompok == 'Minyak Jelantah' ? 'selected' : '' }}>Minyak Jelantah</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-dark mb-1">Jenis Sampah <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="jenis" placeholder="Contoh: Plastik Bening, Kardus Box" required style="border-radius: 8px; font-size: .875rem;">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-dark mb-1">Satuan <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="satuan" placeholder="Contoh: kg, liter, pcs" required style="border-radius: 8px; font-size: .875rem;">
-                    </div>
+                <input type="hidden" name="kelompok" value="{{ $kelompok }}">
+
+                <div class="mb-3">
+                    <label for="input_jenis" class="form-label-custom">Jenis Sampah <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-custom" id="input_jenis" name="jenis" placeholder="Contoh: Plastik Bening, Kardus Box" value="{{ old('jenis') }}" required>
                 </div>
-                <div class="modal-footer" style="border-top: 1px solid rgba(15, 66, 41, 0.08); padding: 1rem 1.5rem;">
-                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal" style="border-radius: 8px;">Batal</button>
-                    <button type="submit" class="btn btn-primary btn-sm" style="background: var(--primary); border-color: var(--primary); border-radius: 8px;">
+
+                <div class="mb-4">
+                    <label for="input_satuan" class="form-label-custom">Satuan <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-custom" id="input_satuan" name="satuan" placeholder="Contoh: kg, liter, pcs" value="{{ old('satuan') }}" required>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+                    <button type="button" class="btn-custom btn-custom-light" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn-custom btn-custom-primary">
                         <i class="fas fa-save me-1"></i> Simpan
                     </button>
                 </div>
@@ -270,6 +341,26 @@
             }
         });
         document.getElementById('infoTotal').innerText = 'Menampilkan ' + visible + ' data';
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var btnTambah = document.getElementById('btnTambahJenis');
+        var modalEl = document.getElementById('modalTambahJenis');
+        
+        if (btnTambah && modalEl) {
+            btnTambah.addEventListener('click', function (e) {
+                e.preventDefault();
+                var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            });
+        }
+
+        @if($errors->any())
+        if (modalEl) {
+            var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.show();
+        }
+        @endif
     });
 </script>
 @endpush
