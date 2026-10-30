@@ -573,6 +573,7 @@
             justify-content: center;
             gap: .4rem;
             transition: all .2s;
+            white-space: nowrap;
         }
         .btn-filter-custom:hover {
             background: var(--dark);
@@ -593,6 +594,7 @@
             align-items: center;
             justify-content: center;
             font-family: 'Open Sans', sans-serif;
+            white-space: nowrap;
         }
         .btn-reset-custom:hover {
             background: #f5f8f5;
@@ -606,7 +608,6 @@
             border: 1px solid rgba(15, 66, 41, .06);
             box-shadow: 0 2px 8px rgba(15, 66, 41, .03);
             padding: 18px 20px;
-            border-bottom: 3px solid var(--primary);
         }
         .summary-label {
             font-size: .72rem;
@@ -818,12 +819,6 @@
             <a href="{{ route('ketua.dashboard') }}" class="topbar-brand">
                 <h1>Berkah Sari</h1>
             </a>
-            <div class="topbar-search d-none d-md-flex">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Cari sesuatu..." id="adminSearchInput">
-            </div>
-        </div>
-
         </div>
 
         <div class="topbar-right">
@@ -869,10 +864,10 @@
                 <div class="topbar-btn d-none d-lg-flex h-100" data-bs-toggle="dropdown" id="profileDropdown"
                     style="gap:12px;cursor:pointer;">
                     <div class="text-end">
-                        <div style="font-family:'Jost',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2;color:#fff;">Admin</div>
-                        <div style="font-size:0.72rem;color:rgba(255,255,255,0.8);">Administrator</div>
+                        <div style="font-family:'Jost',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.2;color:#fff;">Ketua</div>
+                        <div style="font-size:0.72rem;color:rgba(255,255,255,0.8);">Ketua</div>
                     </div>
-                    <div class="topbar-avatar" style="background:#fff;color:var(--primary);font-weight:700;">A</div>
+                    <div class="topbar-avatar" style="background:#fff;color:var(--primary);font-weight:700;">K</div>
                     <i class="fas fa-chevron-down" style="font-size:0.7rem;color:rgba(255,255,255,0.8);"></i>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
@@ -902,15 +897,21 @@
             <a href="{{ route('ketua.kelola-user') }}" class="nav-link {{ request()->routeIs('ketua.kelola-user*') ? 'active' : '' }}">
                 <i class="fas fa-user-cog"></i> Kelola User
             </a>
+            <a href="{{ route('ketua.pengepul') }}" class="nav-link {{ request()->routeIs('ketua.pengepul*', 'ketua.katalog*') ? 'active' : '' }}">
+                <i class="fas fa-truck"></i> Bank Sampah Induk
+            </a>
+            <a href="{{ route('ketua.kategori-sampah') }}" class="nav-link {{ request()->routeIs('ketua.kategori-sampah*', 'ketua.daftar-kategori*') ? 'active' : '' }}">
+                <i class="fas fa-recycle"></i> Kategori Sampah
+            </a>
 
-            <div class="nav-section-label">Laporan & Sistem</div>
-            <a href="{{ route('pengurus.laporan-bank-sampah') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-bank-sampah') ? 'active' : '' }}">
+            <div class="nav-section-label">Laporan</div>
+            <a href="{{ route('ketua.laporan-bank-sampah') }}" class="nav-link {{ request()->routeIs('ketua.laporan-bank-sampah') ? 'active' : '' }}">
                 <i class="fas fa-chart-bar"></i> Laporan Bank Sampah
             </a>
-            <a href="{{ route('pengurus.laporan-minyak-jelantah') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-minyak-jelantah') ? 'active' : '' }}">
+            <a href="{{ route('ketua.laporan-minyak-jelantah') }}" class="nav-link {{ request()->routeIs('ketua.laporan-minyak-jelantah') ? 'active' : '' }}">
                 <i class="fas fa-chart-bar"></i> Laporan Minyak Jelantah
             </a>
-            <a href="{{ route('pengurus.laporan-operasional') }}" class="nav-link {{ request()->routeIs('pengurus.laporan-operasional') ? 'active' : '' }}">
+            <a href="{{ route('ketua.laporan-operasional') }}" class="nav-link {{ request()->routeIs('ketua.laporan-operasional') ? 'active' : '' }}">
                 <i class="fas fa-clipboard-list"></i> Laporan Operasional
             </a>
         </nav>

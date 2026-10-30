@@ -67,7 +67,7 @@
                                     </div>
                                     <h4 class="mb-3">{{ $p->nama_pengepul }}</h4>
                                     <p class="mb-4 text-muted small">Mitra Bank Sampah Induk / Pengepul</p>
-                                    <a class="btn btn-sm" href="{{ route('pengurus.katalog', $p->id_pengepul) }}">Lihat</a>
+                                    <a class="btn btn-sm" href="{{ route('ketua.katalog', $p->id_pengepul) }}">Lihat</a>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 </div>
                                 <h4 class="mb-3">Bank Sampah Bersinar</h4>
                                 <p class="mb-4">Jl. Terusan Bojongsoang No. 174A, Bandung</p>
-                                <a class="btn btn-sm" href="{{ route('pengurus.katalog', 1) }}">Lihat</a>
+                                <a class="btn btn-sm" href="{{ route('ketua.katalog', 1) }}">Lihat</a>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                                 </div>
                                 <h4 class="mb-3">Great Bandung</h4>
                                 <p class="mb-4">Jl. Kalipah Apo No. 41 / Gg. Bahim No. 6, Kota Bandung</p>
-                                <a class="btn btn-sm" href="{{ route('pengurus.katalog', 3) }}">Lihat</a>
+                                <a class="btn btn-sm" href="{{ route('ketua.katalog', 3) }}">Lihat</a>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                                 </div>
                                 <h4 class="mb-3">Pengepul</h4>
                                 <p class="mb-4">Kolektor / pegepul mitra</p>
-                                <a class="btn btn-sm" href="{{ route('pengurus.katalog', 2) }}">Lihat</a>
+                                <a class="btn btn-sm" href="{{ route('ketua.katalog', 2) }}">Lihat</a>
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                                 </div>
                                 <h4 class="mb-3">Buyer Internal</h4>
                                 <p class="mb-4">pengurus / nasabah bank sampah </p>
-                                <a class="btn btn-sm" href="{{ route('pengurus.katalog', 4) }}">Lihat</a>
+                                <a class="btn btn-sm" href="{{ route('ketua.katalog', 4) }}">Lihat</a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form id="formTambahPengepul" action="{{ route('pengurus.pengepul.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="formTambahPengepul" action="{{ route('ketua.pengepul.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">

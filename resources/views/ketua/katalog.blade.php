@@ -33,7 +33,7 @@
     <div class="d-flex align-items-center gap-2">
         <select class="form-select form-select-sm" style="width: auto; border-radius: 8px; font-size: .85rem;" onchange="location = this.value;">
             @foreach($daftar_pengepul as $dp)
-                <option value="{{ route('pengurus.katalog', $dp->id_pengepul) }}" {{ $dp->id_pengepul == $pengepul->id_pengepul ? 'selected' : '' }}>
+                <option value="{{ route('ketua.katalog', $dp->id_pengepul) }}" {{ $dp->id_pengepul == $pengepul->id_pengepul ? 'selected' : '' }}>
                     {{ $dp->nama_pengepul }}
                 </option>
             @endforeach
@@ -115,7 +115,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="formEditHarga" action="{{ route('pengurus.katalog.update-harga') }}" method="POST">
+            <form id="formEditHarga" action="{{ route('ketua.katalog.update-harga') }}" method="POST">
                 @csrf
                 <input type="hidden" name="id_harga" id="edit_id_harga">
 

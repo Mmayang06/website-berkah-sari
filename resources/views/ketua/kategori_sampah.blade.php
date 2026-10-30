@@ -24,7 +24,7 @@
                             </div>
                             <h4 class="mb-3">Bank Sampah</h4>
                             <p class="mb-4">Pengelolaan kategori sampah anorganik seperti plastik, kertas, kardus, botol kaca, dan logam.</p>
-                            <a class="btn btn-sm" href="{{ route('pengurus.daftar-kategori', 'sampah') }}">Lihat</a>
+                            <a class="btn btn-sm" href="{{ route('ketua.daftar-kategori', 'sampah') }}">Lihat</a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                             </div>
                             <h4 class="mb-3">Minyak Jelantah</h4>
                             <p class="mb-4">Pengelolaan limbah minyak jelantah bekas pakai rumah tangga untuk didaur ulang.</p>
-                            <a class="btn btn-sm" href="{{ route('pengurus.daftar-kategori', 'minyak-jelantah') }}">Lihat</a>
+                            <a class="btn btn-sm" href="{{ route('ketua.daftar-kategori', 'minyak-jelantah') }}">Lihat</a>
                         </div>
                     </div>
                 </div>

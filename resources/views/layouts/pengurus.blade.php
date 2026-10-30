@@ -573,6 +573,7 @@
             justify-content: center;
             gap: .4rem;
             transition: all .2s;
+            white-space: nowrap;
         }
         .btn-filter-custom:hover {
             background: var(--dark);
@@ -593,6 +594,7 @@
             align-items: center;
             justify-content: center;
             font-family: 'Open Sans', sans-serif;
+            white-space: nowrap;
         }
         .btn-reset-custom:hover {
             background: #f5f8f5;
@@ -606,7 +608,6 @@
             border: 1px solid rgba(15, 66, 41, .06);
             box-shadow: 0 2px 8px rgba(15, 66, 41, .03);
             padding: 18px 20px;
-            border-bottom: 3px solid var(--primary);
         }
         .summary-label {
             font-size: .72rem;

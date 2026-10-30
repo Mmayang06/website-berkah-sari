@@ -13,8 +13,8 @@
     </div>
     <div class="d-flex align-items-center gap-2">
         <select class="form-select form-select-sm" style="width: auto; border-radius: 8px; font-size: .85rem;" onchange="location = this.value;">
-            <option value="{{ route('pengurus.daftar-kategori', 'sampah') }}" {{ $jenis == 'sampah' ? 'selected' : '' }}>Bank Sampah</option>
-            <option value="{{ route('pengurus.daftar-kategori', 'minyak-jelantah') }}" {{ $jenis == 'minyak-jelantah' ? 'selected' : '' }}>Minyak Jelantah</option>
+            <option value="{{ route('ketua.daftar-kategori', 'sampah') }}" {{ $jenis == 'sampah' ? 'selected' : '' }}>Bank Sampah</option>
+            <option value="{{ route('ketua.daftar-kategori', 'minyak-jelantah') }}" {{ $jenis == 'minyak-jelantah' ? 'selected' : '' }}>Minyak Jelantah</option>
         </select>
         <button type="button" class="btn-action-custom" data-bs-toggle="modal" data-bs-target="#modalTambahJenis" id="btnTambahJenis">
             <i class="fas fa-plus"></i> Tambah Jenis Sampah
@@ -96,7 +96,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ route('pengurus.kategori-sampah.store') }}" method="POST">
+            <form action="{{ route('ketua.kategori-sampah.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="kelompok" value="{{ $kelompok }}">
 
