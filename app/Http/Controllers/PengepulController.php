@@ -84,10 +84,12 @@ class PengepulController extends Controller
                 ->where('harga_pengepul.id_pengepul', $pengepul->id_pengepul)
                 ->select(
                     'harga_pengepul.id_harga',
-                    'kategori_sampah.nama_kategori',
                     'harga_pengepul.harga_jual',
                     'harga_pengepul.periode',
-                    'kategori_sampah.jenis_sampah'
+                    'kategori_sampah.jenis',
+                    'kategori_sampah.satuan',
+                    'kategori_sampah.jenis as nama_kategori',
+                    'kategori_sampah.jenis as jenis_sampah'
                 )
                 ->get();
         }
