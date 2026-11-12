@@ -903,6 +903,9 @@
             <a href="{{ route('ketua.kategori-sampah') }}" class="nav-link {{ request()->routeIs('ketua.kategori-sampah*', 'ketua.daftar-kategori*') ? 'active' : '' }}">
                 <i class="fas fa-recycle"></i> Kategori Sampah
             </a>
+            <a href="{{ route('ketua.tabungan-lingkungan') }}" class="nav-link {{ request()->routeIs('ketua.tabungan-lingkungan*') ? 'active' : '' }}">
+                <i class="fas fa-wallet"></i> Tabungan Lingkungan
+            </a>
 
             <div class="nav-section-label">Laporan</div>
             <a href="{{ route('ketua.laporan-bank-sampah') }}" class="nav-link {{ request()->routeIs('ketua.laporan-bank-sampah') ? 'active' : '' }}">
@@ -913,6 +916,9 @@
             </a>
             <a href="{{ route('ketua.laporan-operasional') }}" class="nav-link {{ request()->routeIs('ketua.laporan-operasional') ? 'active' : '' }}">
                 <i class="fas fa-clipboard-list"></i> Laporan Operasional
+            </a>
+            <a href="{{ route('ketua.laporan-arus-kas') }}" class="nav-link {{ request()->routeIs('ketua.laporan-arus-kas*', 'ketua.laporan-rekonsiliasi*') ? 'active' : '' }}">
+                <i class="fas fa-money-bill-wave"></i> Laporan Arus Kas
             </a>
         </nav>
     </aside>

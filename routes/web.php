@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PengepulController;
 use App\Http\Controllers\KategoriSampahController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\TabunganLingkunganController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -77,6 +78,9 @@ Route::prefix('ketua')->name('ketua.')->middleware(['auth', 'role:admin,ketua'])
     Route::post('/kategori-sampah', [KategoriSampahController::class, 'store'])->name('kategori-sampah.store');
     Route::get('/daftar-kategori/{jenis?}', [KategoriSampahController::class, 'daftar'])->name('daftar-kategori');
 
+    Route::get('/tabungan-lingkungan', [TabunganLingkunganController::class, 'index'])->name('tabungan-lingkungan');
+    Route::post('/tabungan-lingkungan/update-status', [TabunganLingkunganController::class, 'updateStatus'])->name('tabungan-lingkungan.update-status');
+
     // Laporan
     Route::get('/laporan-bank-sampah', [LaporanController::class, 'bankSampah'])->name('laporan-bank-sampah');
     Route::get('/laporan-bank-sampah/export', [LaporanController::class, 'exportBankSampah'])->name('laporan-bank-sampah.export');
@@ -85,6 +89,10 @@ Route::prefix('ketua')->name('ketua.')->middleware(['auth', 'role:admin,ketua'])
     Route::get('/laporan-operasional', [LaporanController::class, 'operasional'])->name('laporan-operasional');
     Route::get('/laporan-operasional/export', [LaporanController::class, 'exportOperasional'])->name('laporan-operasional.export');
     Route::post('/laporan-operasional', [LaporanController::class, 'storeOperasional'])->name('laporan-operasional.store');
+    Route::get('/laporan-arus-kas', [LaporanController::class, 'rekonsiliasi'])->name('laporan-arus-kas');
+    Route::get('/laporan-arus-kas/export', [LaporanController::class, 'exportRekonsiliasi'])->name('laporan-arus-kas.export');
+    Route::get('/laporan-rekonsiliasi', [LaporanController::class, 'rekonsiliasi'])->name('laporan-rekonsiliasi');
+    Route::get('/laporan-rekonsiliasi/export', [LaporanController::class, 'exportRekonsiliasi'])->name('laporan-rekonsiliasi.export');
 });
 
 

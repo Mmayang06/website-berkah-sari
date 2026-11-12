@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
 
 class LaporanController extends Controller
@@ -271,6 +272,190 @@ class LaporanController extends Controller
 
         return response()->streamDownload(function() use ($params, $data) {
             echo view('exports.laporan-operasional-excel', array_merge($params, $data))->render();
+        }, $filename, [
+            'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+            'Cache-Control' => 'max-age=0',
+        ]);
+    }
+
+    private function getRekonsiliasiData($bulan, $tahun)
+    {
+        if (!Schema::hasTable('tabungan_lingkungan')) {
+            Schema::create('tabungan_lingkungan', function ($table) {
+                $table->id('id_tabungan');
+                $table->unsignedBigInteger('id_lingkungan');
+                $table->integer('bulan');
+                $table->integer('tahun');
+                $table->decimal('nominal', 15, 2)->default(0);
+                $table->string('status', 20)->default('Ditabung');
+                $table->timestamps();
+            });
+        }
+
+        $namaBulan = Carbon::create()->month($bulan)->locale('id')->isoFormat('MMMM');
+        $labelPeriode = "Bulan {$namaBulan} {$tahun}";
+
+        $tglAwalBulan = Carbon::create($tahun, $bulan, 1)->startOfMonth()->toDateString();
+        $tglAkhirBulan = Carbon::create($tahun, $bulan, 1)->endOfMonth()->toDateString();
+
+        // saldo kas sebelum bulan yang dipilih
+        $pemasukanLalu = (float) DB::table('setoran_sampah as s')
+            ->join('detail_setoran as ds', 's.id_setoran', '=', 'ds.id_setoran')
+            ->join('kategori_sampah as k', 'ds.id_kategori', '=', 'k.id_kategori')
+            ->where('k.kelompok', 'Sampah')
+            ->where('s.tanggal', '<', $tglAwalBulan)
+            ->sum('ds.harga_total');
+
+        $opsLalu = (float) DB::table('biaya_operasional')
+            ->where('tanggal_keluar', '<', $tglAwalBulan)
+            ->sum('biaya_keluar');
+
+        $transferLalu = (float) DB::table('tabungan_lingkungan')
+            ->where('status', 'Ditransfer')
+            ->where(function($q) use ($tahun, $bulan) {
+                $q->where('tahun', '<', $tahun)
+                  ->orWhere(function($q2) use ($tahun, $bulan) {
+                      $q2->where('tahun', $tahun)
+                         ->where('bulan', '<', $bulan);
+                  });
+            })
+            ->sum('nominal');
+
+        $saldoAwal = $pemasukanLalu - ($opsLalu + $transferLalu);
+
+        // transaksi di bulan yang dipilih
+        $setoranBulanIni = DB::table('setoran_sampah as s')
+            ->join('donatur as d', 's.id_donatur', '=', 'd.id_donatur')
+            ->leftJoin('lingkungan as l', 'd.id_lingkungan', '=', 'l.id_lingkungan')
+            ->join('detail_setoran as ds', 's.id_setoran', '=', 'ds.id_setoran')
+            ->join('kategori_sampah as k', 'ds.id_kategori', '=', 'k.id_kategori')
+            ->where('k.kelompok', 'Sampah')
+            ->whereYear('s.tanggal', $tahun)
+            ->whereMonth('s.tanggal', $bulan)
+            ->select(
+                's.tanggal',
+                'd.nama_donatur',
+                'l.nama_lingkungan',
+                DB::raw('SUM(ds.harga_total) as total_nominal')
+            )
+            ->groupBy('s.id_setoran', 's.tanggal', 'd.nama_donatur', 'l.nama_lingkungan')
+            ->get();
+
+        $opsBulanIni = DB::table('biaya_operasional')
+            ->whereYear('tanggal_keluar', $tahun)
+            ->whereMonth('tanggal_keluar', $bulan)
+            ->select('tanggal_keluar as tanggal', 'biaya_keluar', 'keterangan')
+            ->get();
+
+        $transferBulanIni = DB::table('tabungan_lingkungan as t')
+            ->join('lingkungan as l', 't.id_lingkungan', '=', 'l.id_lingkungan')
+            ->where('t.bulan', $bulan)
+            ->where('t.tahun', $tahun)
+            ->where('t.status', 'Ditransfer')
+            ->where('t.nominal', '>', 0)
+            ->select('t.nominal', 't.updated_at', 'l.nama_lingkungan')
+            ->get();
+
+        $mutasi = [];
+
+        foreach ($setoranBulanIni as $item) {
+            $lingk = $item->nama_lingkungan ? " - Lingkungan {$item->nama_lingkungan}" : "";
+            $mutasi[] = [
+                'tanggal' => $item->tanggal,
+                'keterangan' => "Pemasukan Bank Sampah ({$item->nama_donatur}{$lingk})",
+                'kategori' => 'Pemasukan',
+                'masuk' => (float) $item->total_nominal,
+                'keluar' => 0,
+            ];
+        }
+
+        foreach ($opsBulanIni as $item) {
+            $mutasi[] = [
+                'tanggal' => $item->tanggal,
+                'keterangan' => "Biaya Operasional: {$item->keterangan}",
+                'kategori' => 'Operasional',
+                'masuk' => 0,
+                'keluar' => (float) $item->biaya_keluar,
+            ];
+        }
+
+        foreach ($transferBulanIni as $item) {
+            $tglTf = $item->updated_at ? date('Y-m-d', strtotime($item->updated_at)) : $tglAkhirBulan;
+            $mutasi[] = [
+                'tanggal' => $tglTf,
+                'keterangan' => "Transfer Hasil Bank Sampah ke Lingkungan {$item->nama_lingkungan}",
+                'kategori' => 'Transfer Lingkungan',
+                'masuk' => 0,
+                'keluar' => (float) $item->nominal,
+            ];
+        }
+
+        usort($mutasi, function ($a, $b) {
+            return strcmp($a['tanggal'], $b['tanggal']);
+        });
+
+        $currentSaldo = $saldoAwal;
+        $totalMasuk = 0;
+        $totalKeluar = 0;
+
+        foreach ($mutasi as &$row) {
+            $currentSaldo = $currentSaldo + $row['masuk'] - $row['keluar'];
+            $row['saldo'] = $currentSaldo;
+            $totalMasuk += $row['masuk'];
+            $totalKeluar += $row['keluar'];
+        }
+        unset($row);
+
+        $saldoAkhir = $saldoAwal + $totalMasuk - $totalKeluar;
+
+        $hakTabunganLingkungan = (float) DB::table('tabungan_lingkungan')
+            ->where('status', 'Ditabung')
+            ->where(function($q) use ($tahun, $bulan) {
+                $q->where('tahun', '<', $tahun)
+                  ->orWhere(function($q2) use ($tahun, $bulan) {
+                      $q2->where('tahun', $tahun)
+                         ->where('bulan', '<=', $bulan);
+                  });
+            })
+            ->sum('nominal');
+
+        $kasBersihParoki = $saldoAkhir - $hakTabunganLingkungan;
+
+        return compact(
+            'bulan',
+            'tahun',
+            'namaBulan',
+            'labelPeriode',
+            'saldoAwal',
+            'totalMasuk',
+            'totalKeluar',
+            'saldoAkhir',
+            'hakTabunganLingkungan',
+            'kasBersihParoki',
+            'mutasi'
+        );
+    }
+
+    public function rekonsiliasi(Request $request)
+    {
+        $bulan = (int) $request->get('bulan', date('n'));
+        $tahun = (int) $request->get('tahun', date('Y'));
+        $data = $this->getRekonsiliasiData($bulan, $tahun);
+
+        return view('ketua.laporan-rekonsiliasi', $data);
+    }
+
+    public function exportRekonsiliasi(Request $request)
+    {
+        $bulan = (int) $request->get('bulan', date('n'));
+        $tahun = (int) $request->get('tahun', date('Y'));
+        $data = $this->getRekonsiliasiData($bulan, $tahun);
+
+        $filename = "Laporan_Arus_Kas_" . str_replace([' ', '/', '(', ')', '-'], '_', $data['labelPeriode']) . ".xls";
+
+        return response()->streamDownload(function() use ($data) {
+            echo view('exports.laporan-rekonsiliasi-excel', $data)->render();
         }, $filename, [
             'Content-Type' => 'application/vnd.ms-excel; charset=utf-8',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
