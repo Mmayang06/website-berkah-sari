@@ -183,6 +183,7 @@
 @php
     $minyak = $koleksi->total_minyak ?? 0;
     $sampah = $koleksi->total_sampah ?? 0;
+    $bulan  = now()->locale('id')->isoFormat('MMMM YYYY');
 @endphp
 
 <div class="db-wrap">
@@ -192,6 +193,7 @@
             <div class="metric-card">
                 <div class="metric-top">
                     <span class="metric-label">Total Minyak Jelantah</span>
+                    <span style="font-size:0.72rem; color:var(--dark); background:var(--light); padding:2px 8px; border-radius:10px; font-weight:600;">{{ $bulan }}</span>
                 </div>
                 <div class="metric-value">
                     {{ number_format($minyak, 1, ',', '.') }}
@@ -199,13 +201,14 @@
                 </div>
                 <div class="metric-change up">
                     <i class="fas fa-tint" style="font-size:.65rem"></i>
-                    Dari seluruh setoran donatur
+                    Setoran bulan ini
                 </div>
             </div>
 
             <div class="metric-card">
                 <div class="metric-top">
                     <span class="metric-label">Total Sampah</span>
+                    <span style="font-size:0.72rem; color:var(--dark); background:var(--light); padding:2px 8px; border-radius:10px; font-weight:600;">{{ $bulan }}</span>
                 </div>
                 <div class="metric-value">
                     {{ number_format($sampah, 1, ',', '.') }}
@@ -213,13 +216,14 @@
                 </div>
                 <div class="metric-change up">
                     <i class="fas fa-recycle" style="font-size:.65rem"></i>
-                    Dari seluruh setoran donatur
+                    Setoran bulan ini
                 </div>
             </div>
 
             <div class="metric-card">
                 <div class="metric-top">
-                    <span class="metric-label">Uang Bersih Diterima</span>
+                    <span class="metric-label">Total Uang</span>
+                    <span style="font-size:0.72rem; color:var(--dark); background:var(--light); padding:2px 8px; border-radius:10px; font-weight:600;">{{ $bulan }}</span>
                 </div>
                 <div class="metric-value" style="font-size:1.35rem;">
                     Rp&nbsp;{{ number_format($bersih, 0, ',', '.') }}
@@ -233,6 +237,7 @@
             <div class="metric-card">
                 <div class="metric-top">
                     <span class="metric-label">Biaya Operasional</span>
+                    <span style="font-size:0.72rem; color:var(--dark); background:var(--light); padding:2px 8px; border-radius:10px; font-weight:600;">{{ $bulan }}</span>
                 </div>
                 <div class="metric-value" style="font-size:1.35rem;">
                     Rp&nbsp;{{ number_format($ops, 0, ',', '.') }}

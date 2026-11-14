@@ -38,12 +38,14 @@ class KategoriSampahController extends Controller
             'kelompok' => 'required|in:Sampah,Minyak Jelantah',
             'jenis' => 'required|string|max:100',
             'satuan' => 'required|string|max:50',
+            'keterangan' => 'nullable|string',
         ]);
 
         DB::table('kategori_sampah')->insert([
             'kelompok' => $request->kelompok,
             'jenis' => $request->jenis,
             'satuan' => $request->satuan,
+            'keterangan' => $request->keterangan,
         ]);
 
         $redirectJenis = ($request->kelompok === 'Minyak Jelantah') ? 'minyak-jelantah' : 'sampah';

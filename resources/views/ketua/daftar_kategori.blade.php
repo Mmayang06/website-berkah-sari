@@ -57,8 +57,9 @@
             <thead>
                 <tr>
                     <th style="width: 50px;">No</th>
-                    <th>Jenis Sampah</th>
-                    <th>Satuan</th>
+                    <th style="width: 150px;">Jenis Sampah</th>
+                    <th>Keterangan</th>
+                    <th style="width: 90px;">Satuan</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,11 +67,12 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td class="fw-bold text-dark">{{ $item->jenis }}</td>
+                        <td style="font-size: .85rem; color: #525368; line-height: 1.5;">{{ $item->keterangan ?? '-' }}</td>
                         <td>{{ $item->satuan }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3" class="text-center py-4 text-muted">
+                        <td colspan="4" class="text-center py-4 text-muted">
                             Belum ada data kategori sampah.
                         </td>
                     </tr>
@@ -105,9 +107,14 @@
                     <input type="text" class="form-control-custom" id="input_jenis" name="jenis" placeholder="Contoh: Plastik Bening, Kardus Box" value="{{ old('jenis') }}" required>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-3">
                     <label for="input_satuan" class="form-label-custom">Satuan <span class="text-danger">*</span></label>
                     <input type="text" class="form-control-custom" id="input_satuan" name="satuan" placeholder="Contoh: kg, liter, pcs" value="{{ old('satuan') }}" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="input_keterangan" class="form-label-custom">Keterangan</label>
+                    <textarea class="form-control-custom" id="input_keterangan" name="keterangan" rows="3" placeholder="Contoh: Ketentuan, contoh sampah, atau catatan">{{ old('keterangan') }}</textarea>
                 </div>
 
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top">
