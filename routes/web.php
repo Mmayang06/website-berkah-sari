@@ -9,6 +9,7 @@ use App\Http\Controllers\KategoriSampahController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\TabunganLingkunganController;
 use App\Http\Controllers\PetugasInputController;
+use App\Http\Controllers\PenyetoranIndukController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -79,6 +80,10 @@ Route::prefix('ketua')->name('ketua.')->middleware(['auth', 'role:admin,ketua'])
     Route::post('/kategori-sampah', [KategoriSampahController::class, 'store'])->name('kategori-sampah.store');
     Route::get('/daftar-kategori/{jenis?}', [KategoriSampahController::class, 'daftar'])->name('daftar-kategori');
 
+    Route::get('/penyetoran', [PenyetoranIndukController::class, 'index'])->name('penyetoran');
+    Route::post('/penyetoran', [PenyetoranIndukController::class, 'store'])->name('penyetoran.store');
+    Route::delete('/penyetoran/{id}', [PenyetoranIndukController::class, 'destroy'])->name('penyetoran.destroy');
+
     Route::get('/tabungan-lingkungan', [TabunganLingkunganController::class, 'index'])->name('tabungan-lingkungan');
     Route::post('/tabungan-lingkungan/update-status', [TabunganLingkunganController::class, 'updateStatus'])->name('tabungan-lingkungan.update-status');
 
@@ -137,6 +142,10 @@ Route::prefix('pengurus')->name('pengurus.')->middleware(['auth', 'role:pengurus
     Route::get('/kategori-sampah', [KategoriSampahController::class, 'index'])->name('kategori-sampah');
     Route::post('/kategori-sampah', [KategoriSampahController::class, 'store'])->name('kategori-sampah.store');
     Route::get('/daftar-kategori/{jenis?}', [KategoriSampahController::class, 'daftar'])->name('daftar-kategori');
+
+    Route::get('/penyetoran', [PenyetoranIndukController::class, 'index'])->name('penyetoran');
+    Route::post('/penyetoran', [PenyetoranIndukController::class, 'store'])->name('penyetoran.store');
+    Route::delete('/penyetoran/{id}', [PenyetoranIndukController::class, 'destroy'])->name('penyetoran.destroy');
 
     // Laporan
     Route::get('/laporan-bank-sampah', [LaporanController::class, 'bankSampah'])->name('laporan-bank-sampah');

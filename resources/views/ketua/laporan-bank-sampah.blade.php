@@ -5,6 +5,20 @@
 
 @section('content')
 
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show mb-4 shadow-sm" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger alert-dismissible fade show mb-4 shadow-sm" role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div style="margin-bottom: 20px;">
     <h4 style="font-family:'Jost',sans-serif; font-weight:700; color:var(--dark); margin:0 0 4px; font-size:1.2rem;">
         Laporan Bank Sampah
@@ -132,8 +146,8 @@
                         <th>Lingkungan</th>
                         <th>Jenis Sampah</th>
                         <th>Berat (kg)</th>
+                        <th>Bank Sampah Induk</th>
                         <th>Total Nilai</th>
-                        <th>Status</th>
                     </tr>
                 @endif
             </thead>
@@ -157,8 +171,18 @@
                             <td>{{ $row->nama_lingkungan }}</td>
                             <td>{{ $row->jenis_sampah }}</td>
                             <td>{{ number_format($row->berat, 2, ',', '.') }} kg</td>
-                            <td class="fw-bold text-success">Rp {{ number_format($row->total_nilai, 0, ',', '.') }}</td>
-                            <td><span class="badge-table success">Selesai</span></td>
+                            <td>
+                                @if($row->id_penyetoran && $row->nama_mitra)
+                                    <span class="badge bg-success" style="font-weight: 500;">{{ $row->nama_mitra }}</span>
+                                @else
+                                    <span class="badge bg-light text-muted border" style="font-weight: 500;">Belum disetor</span>
+                                @endif
+                            </td>
+                            @if($row->id_penyetoran && $row->total_nilai > 0)
+                                <td class="fw-bold text-success">Rp {{ number_format($row->total_nilai, 0, ',', '.') }}</td>
+                            @else
+                                <td class="text-muted">-</td>
+                            @endif
                         </tr>
                     @endif
                 @empty
@@ -184,8 +208,8 @@
                     <tr>
                         <td colspan="5" class="text-center">TOTAL KESELURUHAN</td>
                         <td>{{ number_format($totalBerat, 2, ',', '.') }} kg</td>
-                        <td class="text-success">Rp {{ number_format($totalNilai, 0, ',', '.') }}</td>
                         <td></td>
+                        <td class="text-success">Rp {{ number_format($totalNilai, 0, ',', '.') }}</td>
                     </tr>
                 @endif
             </tfoot>

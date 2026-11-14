@@ -900,6 +900,9 @@
             <a href="{{ route('ketua.pengepul') }}" class="nav-link {{ request()->routeIs('ketua.pengepul*', 'ketua.katalog*') ? 'active' : '' }}">
                 <i class="fas fa-truck"></i> Bank Sampah Induk
             </a>
+            <a href="{{ route('ketua.penyetoran') }}" class="nav-link {{ request()->routeIs('ketua.penyetoran*') ? 'active' : '' }}">
+                <i class="fas fa-dolly"></i> Penyetoran ke Induk
+            </a>
             <a href="{{ route('ketua.kategori-sampah') }}" class="nav-link {{ request()->routeIs('ketua.kategori-sampah*', 'ketua.daftar-kategori*') ? 'active' : '' }}">
                 <i class="fas fa-recycle"></i> Kategori Sampah
             </a>

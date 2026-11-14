@@ -5,6 +5,20 @@
 
 @section('content')
 
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show mb-4 shadow-sm" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger alert-dismissible fade show mb-4 shadow-sm" role="alert">
+    {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div style="margin-bottom: 20px;">
     <h4 style="font-family:'Jost',sans-serif; font-weight:700; color:var(--dark); margin:0 0 4px; font-size:1.2rem;">
         Laporan Minyak Jelantah
@@ -15,20 +29,14 @@
 </div>
 
 <div class="row g-3 mb-4">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="summary-card">
             <div class="summary-label">Total Volume</div>
             <div class="summary-value">{{ number_format($totalBerat, 2, ',', '.') }}</div>
             <div class="summary-unit">Liter (L)</div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="summary-card">
-            <div class="summary-label">Total Nilai Rupiah</div>
-            <div class="summary-value">Rp {{ number_format($totalNilai, 0, ',', '.') }}</div>
-            <div class="summary-unit">Rupiah</div>
-        </div>
-    </div>
+
 </div>
 
 <div class="filter-card">
@@ -122,7 +130,6 @@
                         <th>{{ $namaBulan[0] }} (Rp)</th>
                         <th>{{ $namaBulan[1] }} (Rp)</th>
                         <th>{{ $namaBulan[2] }} (Rp)</th>
-                        <th>Jumlah Total</th>
                     </tr>
                 @else
                     <tr>
@@ -131,8 +138,6 @@
                         <th>Nama Donatur</th>
                         <th>Lingkungan</th>
                         <th>Volume</th>
-                        <th>Total Nilai</th>
-                        <th>Status</th>
                     </tr>
                 @endif
             </thead>
@@ -146,7 +151,6 @@
                             <td>Rp {{ number_format($row->bulan_1, 0, ',', '.') }}</td>
                             <td>Rp {{ number_format($row->bulan_2, 0, ',', '.') }}</td>
                             <td>Rp {{ number_format($row->bulan_3, 0, ',', '.') }}</td>
-                            <td class="fw-bold text-success">Rp {{ number_format($row->total_nilai, 0, ',', '.') }}</td>
                         </tr>
                     @else
                         <tr>
@@ -155,13 +159,11 @@
                             <td class="fw-bold">{{ $row->nama_donatur }}</td>
                             <td>{{ $row->nama_lingkungan }}</td>
                             <td>{{ number_format($row->berat, 2, ',', '.') }} L</td>
-                            <td class="fw-bold text-success">Rp {{ number_format($row->total_nilai, 0, ',', '.') }}</td>
-                            <td><span class="badge-table success">Selesai</span></td>
                         </tr>
                     @endif
                 @empty
                     <tr>
-                        <td colspan="{{ $tipe === 'triwulan' ? '7' : '7' }}" class="empty-ph">
+                        <td colspan="{{ $tipe === 'triwulan' ? '6' : '5' }}" class="empty-ph">
                             <i class="fas fa-inbox d-block mb-2" style="font-size:1.8rem;opacity:.2;color:var(--primary)"></i>
                             Belum ada data setoran minyak jelantah untuk periode ini.
                         </td>
@@ -176,14 +178,11 @@
                         <td>Rp {{ number_format($items->sum('bulan_1'), 0, ',', '.') }}</td>
                         <td>Rp {{ number_format($items->sum('bulan_2'), 0, ',', '.') }}</td>
                         <td>Rp {{ number_format($items->sum('bulan_3'), 0, ',', '.') }}</td>
-                        <td class="text-success">Rp {{ number_format($totalNilai, 0, ',', '.') }}</td>
                     </tr>
                 @else
                     <tr>
                         <td colspan="4" class="text-center">TOTAL KESELURUHAN</td>
                         <td>{{ number_format($totalBerat, 2, ',', '.') }} L</td>
-                        <td class="text-success">Rp {{ number_format($totalNilai, 0, ',', '.') }}</td>
-                        <td></td>
                     </tr>
                 @endif
             </tfoot>

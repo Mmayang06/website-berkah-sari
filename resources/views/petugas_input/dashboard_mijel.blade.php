@@ -1,19 +1,8 @@
 @extends('layouts.petugas_input')
 
 @section('title', 'Input Minyak Jelantah - Silih Asih')
-@section('brand_title', 'Silih Asih Minyak Jelantah')
+@section('brand_title', 'Silih Asih')
 @section('page-title', 'Input Minyak Jelantah')
-
-@section('topbar_action')
-    <a href="{{ route('petugas.dashboard_bs') }}" class="btn-switch-module" title="Pindah ke Bank Sampah">
-        <i class="fas fa-recycle icon-module"></i>
-        <span>Pindah ke Bank Sampah</span>
-        <i class="fas fa-exchange-alt ms-1 text-muted" style="font-size:0.75rem;"></i>
-    </a>
-    <a href="{{ route('petugas.pilih') }}" class="btn btn-sm btn-outline-secondary d-none d-md-inline-flex align-items-center gap-1" style="border-radius: 50px; font-size: 0.8rem; font-weight: 600; padding: 6px 14px;">
-        <i class="fas fa-th-large"></i> Menu
-    </a>
-@endsection
 
 @section('content')
 
@@ -27,14 +16,7 @@
 </div>
 
 <div class="row g-3 mb-4">
-    <div class="col-md-6">
-        <div class="summary-card">
-            <div class="summary-label">Total Transaksi Hari Ini</div>
-            <div class="summary-value" id="rekap-transaksi">{{ $rekapHariIni->total_transaksi }}</div>
-            <div class="summary-unit">Setoran masuk</div>
-        </div>
-    </div>
-    <div class="col-md-6">
+    <div class="col-12">
         <div class="summary-card">
             <div class="summary-label">Total Volume Minyak</div>
             <div class="summary-value text-primary">
@@ -192,7 +174,6 @@
 
                     $('#tblSetoranHariIni tbody').prepend(barisBaru);
 
-                    $('#rekap-transaksi').text(res.rekap.total_transaksi);
                     $('#rekap-berat').text(res.rekap.total_berat);
 
                     $('#input-berat').val('');
@@ -210,6 +191,11 @@
                 showNotif(err, 'danger');
             }
         });
+    });
+
+    $('#input-berat').on('blur', function() {
+        var val = parseFloat($(this).val());
+        if (!isNaN(val)) $(this).val(val.toFixed(2));
     });
 </script>
 @endpush

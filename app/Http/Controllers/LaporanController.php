@@ -100,6 +100,8 @@ class LaporanController extends Controller
                 ->leftJoin('lingkungan as l', 'd.id_lingkungan', '=', 'l.id_lingkungan')
                 ->join('detail_setoran as ds', 's.id_setoran', '=', 'ds.id_setoran')
                 ->join('kategori_sampah as k', 'ds.id_kategori', '=', 'k.id_kategori')
+                ->leftJoin('penyetoran_induk as pi', 'ds.id_penyetoran', '=', 'pi.id_penyetoran')
+                ->leftJoin('pengepul as p', 'pi.id_pengepul', '=', 'p.id_pengepul')
                 ->where('k.kelompok', $kelompok)
                 ->whereYear('s.tanggal', $tahun)
                 ->whereMonth('s.tanggal', $bulan);
@@ -115,7 +117,9 @@ class LaporanController extends Controller
                 DB::raw('COALESCE(l.nama_lingkungan, "-") as nama_lingkungan'),
                 'k.jenis as jenis_sampah',
                 'ds.total as berat',
-                'ds.harga_total as total_nilai'
+                'ds.harga_total as total_nilai',
+                'ds.id_penyetoran',
+                'p.nama_pengepul as nama_mitra'
             )
             ->orderBy('s.tanggal', 'desc')
             ->orderBy('s.id_setoran', 'desc')

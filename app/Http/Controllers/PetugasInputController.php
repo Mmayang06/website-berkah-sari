@@ -144,6 +144,7 @@ class PetugasInputController extends Controller
             'id_kategori' => $request->id_kategori,
             'total' => $request->berat,
             'harga_total' => 0,
+            'id_penyetoran' => null,
         ]);
 
         $kategori = DB::table('kategori_sampah')->where('id_kategori', $request->id_kategori)->first();

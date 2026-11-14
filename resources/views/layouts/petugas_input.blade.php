@@ -504,9 +504,9 @@
     <!-- TOPBAR -->
     <header class="petugas-topbar">
         <div class="topbar-left">
-            <a href="{{ route('petugas.pilih') }}" class="topbar-brand" title="Pilih Menu Input">
+            <span class="topbar-brand">
                 <h1>@yield('brand_title', 'Silih Asih')</h1>
-            </a>
+            </span>
             @yield('topbar_action')
         </div>
 
@@ -558,8 +558,6 @@
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end mt-0" style="border:none;box-shadow:0 0 15px rgba(0,0,0,.08);">
                     <li><div class="px-4 py-2" style="font-size:0.7rem;font-weight:600;color:#a8c4aa;letter-spacing:1px;">SELAMAT DATANG!</div></li>
-                    <li><a class="dropdown-item py-2" href="{{ route('petugas.pilih') }}"><i class="fas fa-th-large me-2 text-primary"></i>Pilih Menu Input</a></li>
-                    <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('portal.logout') }}">
                             @csrf
