@@ -1,6 +1,6 @@
 @extends('layouts.pengurus')
 
-@section('title', 'Laporan Bank Sampah - Berkah Sari')
+@section('title', 'Laporan Bank Sampah - Silih Asih')
 @section('page-title', 'Laporan Bank Sampah')
 
 @section('content')

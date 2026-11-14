@@ -1,6 +1,6 @@
 @extends('layouts.ketua')
 
-@section('title', 'Tabungan Lingkungan - Berkah Sari')
+@section('title', 'Tabungan Lingkungan - Silih Asih')
 @section('page-title', 'Tabungan Lingkungan')
 
 @section('content')

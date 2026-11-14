@@ -1,6 +1,6 @@
 ﻿@extends('layouts.ketua')
 
-@section('title', 'Kelola User - Admin Berkah Sari')
+@section('title', 'Kelola User - Admin Silih Asih')
 @section('page-title', 'Kelola User')
 
 @section('content')

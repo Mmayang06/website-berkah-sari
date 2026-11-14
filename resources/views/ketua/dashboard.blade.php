@@ -1,6 +1,6 @@
 @extends('layouts.ketua')
 
-@section('title', 'Dashboard Ketua - Berkah Sari')
+@section('title', 'Dashboard Ketua - Silih Asih')
 @section('page-title', 'Dashboard')
 
 @push('styles')

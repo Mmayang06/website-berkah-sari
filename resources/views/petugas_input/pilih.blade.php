@@ -1,6 +1,6 @@
 @extends('layouts.petugas_input')
 
-@section('title', 'Pilih Jenis Input - Berkah Sari')
+@section('title', 'Pilih Jenis Input - Silih Asih')
 @section('page-title', 'Pilih Jenis')
 
 @push('styles')

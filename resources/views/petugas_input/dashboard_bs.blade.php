@@ -1,7 +1,7 @@
 @extends('layouts.petugas_input')
 
-@section('title', 'Input Bank Sampah - Berkah Sari')
-@section('brand_title', 'Berkah Sari Bank Sampah')
+@section('title', 'Input Bank Sampah - Silih Asih')
+@section('brand_title', 'Silih Asih Bank Sampah')
 @section('page-title', 'Input Bank Sampah')
 
 @section('topbar_action')

@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'Panel Petugas - Berkah Sari')</title>
+    <title>@yield('title', 'Panel Petugas - Silih Asih')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="@yield('description', 'Panel Petugas Input Berkah Sari')" name="description">
+    <meta content="@yield('description', 'Panel Petugas Input Silih Asih')" name="description">
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.ico') }}" rel="icon">
@@ -505,7 +505,7 @@
     <header class="petugas-topbar">
         <div class="topbar-left">
             <a href="{{ route('petugas.pilih') }}" class="topbar-brand" title="Pilih Menu Input">
-                <h1>@yield('brand_title', 'Berkah Sari')</h1>
+                <h1>@yield('brand_title', 'Silih Asih')</h1>
             </a>
             @yield('topbar_action')
         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.pengurus')
 
-@section('title', 'Dashboard Pengurus - Berkah Sari')
+@section('title', 'Dashboard Pengurus - Silih Asih')
 @section('page-title', 'Dashboard')
 
 @push('styles')

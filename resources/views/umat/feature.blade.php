@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Fitur - Berkah Sari')
+@section('title', 'Fitur - Silih Asih')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <p class="fs-5 fw-bold text-primary">Kenapa Memilih Kami!</p>
                     <h1 class="display-5 mb-4">Alasan Mengapa Kami Dipercaya Banyak Klien</h1>
-                    <p class="mb-4">Berkah Sari hadir dengan standar layanan tertinggi, menggunakan peralatan modern dan tim bersertifikat untuk memberikan hasil terbaik bagi taman Anda.</p>
+                    <p class="mb-4">Silih Asih hadir dengan standar layanan tertinggi, menggunakan peralatan modern dan tim bersertifikat untuk memberikan hasil terbaik bagi taman Anda.</p>
                     <div class="row g-4">
                         <div class="col-6">
                             <div class="d-flex align-items-center">

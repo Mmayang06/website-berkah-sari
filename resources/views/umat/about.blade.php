@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - Berkah Sari')
+@section('title', 'Tentang Kami - Silih Asih')
 
 @section('content')
 
@@ -11,13 +11,13 @@
         <div class="container">
             <div class="row g-5 align-items-end">
                 <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <img class="img-fluid rounded" src="{{ asset('img/about.jpg') }}" alt="About Berkah Sari">
+                    <img class="img-fluid rounded" src="{{ asset('img/about.jpg') }}" alt="About Silih Asih">
                 </div>
                 <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
                     <h1 class="display-1 text-primary mb-0">25</h1>
                     <p class="text-primary mb-4">Tahun Pengalaman</p>
                     <h1 class="display-5 mb-4">Kami Jadikan Rumah Anda Seperti Taman</h1>
-                    <p class="mb-4">Berkah Sari adalah perusahaan jasa gardening dan landscaping terpercaya yang telah berdiri sejak tahun 1999. Kami melayani berbagai kebutuhan penataan taman, mulai dari taman rumah, taman kantor, hingga taman resort.</p>
+                    <p class="mb-4">Silih Asih adalah perusahaan jasa gardening dan landscaping terpercaya yang telah berdiri sejak tahun 1999. Kami melayani berbagai kebutuhan penataan taman, mulai dari taman rumah, taman kantor, hingga taman resort.</p>
                     <a class="btn btn-primary py-3 px-4" href="{{ route('service') }}">Lihat Layanan</a>
                 </div>
                 <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">

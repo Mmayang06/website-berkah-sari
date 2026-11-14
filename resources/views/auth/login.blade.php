@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Portal Pengurus - Berkah Sari</title>
+    <title>Login Portal Pengurus - Silih Asih</title>
     <meta name="robots" content="noindex, nofollow">
     <link href="{{ asset('img/favicon.ico') }}" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -171,14 +171,14 @@
 <body>
     <div class="topbar-strip"></div>
     <header class="topbar">
-        <span class="brand">Berkah Sari</span>
+        <span class="brand">Silih Asih</span>
         <span class="portal-label">Portal Login</span>
     </header>
 
     <div class="login-wrap">
     <main class="login-card">
         <h1>Selamat Datang</h1>
-        <p class="subtitle">Silakan login ke Portal Pengurus Berkah Sari.</p>
+        <p class="subtitle">Silakan login ke Portal Pengurus Silih Asih.</p>
 
         @if (session('info'))
             <div class="alert info">{{ session('info') }}</div>

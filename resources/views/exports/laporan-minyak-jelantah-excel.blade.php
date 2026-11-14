@@ -15,7 +15,7 @@
 <body>
     <table>
         <tr>
-            <td colspan="{{ $tipe === 'triwulan' ? '7' : '6' }}" class="title">REKAP MINYAK JELANTAH BERKAH SARI</td>
+            <td colspan="{{ $tipe === 'triwulan' ? '7' : '6' }}" class="title">REKAP MINYAK JELANTAH SILIH ASIH</td>
         </tr>
         <tr>
             <td colspan="{{ $tipe === 'triwulan' ? '7' : '6' }}" class="sub">Periode: {{ $labelPeriode }}</td>

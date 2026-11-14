@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Testimoni - Berkah Sari')
+@section('title', 'Testimoni - Silih Asih')
 
 @section('content')
 
@@ -24,13 +24,13 @@
                     <div class="owl-carousel testimonial-carousel">
                         <div class="testimonial-item">
                             <img class="img-fluid rounded mb-3" src="{{ asset('img/testimonial-1.jpg') }}" alt="">
-                            <p class="fs-5">"Berkah Sari mengubah halaman rumah kami menjadi taman impian yang indah. Tim mereka sangat profesional dan hasilnya melebihi ekspektasi!"</p>
+                            <p class="fs-5">"Silih Asih mengubah halaman rumah kami menjadi taman impian yang indah. Tim mereka sangat profesional dan hasilnya melebihi ekspektasi!"</p>
                             <h4>Budi Santoso</h4>
                             <span>Pemilik Rumah di Jakarta</span>
                         </div>
                         <div class="testimonial-item">
                             <img class="img-fluid rounded mb-3" src="{{ asset('img/testimonial-2.jpg') }}" alt="">
-                            <p class="fs-5">"Tim Berkah Sari sangat profesional, tepat waktu, dan hasilnya memuaskan. Taman kantor kami sekarang jauh lebih indah dan asri."</p>
+                            <p class="fs-5">"Tim Silih Asih sangat profesional, tepat waktu, dan hasilnya memuaskan. Taman kantor kami sekarang jauh lebih indah dan asri."</p>
                             <h4>Siti Rahayu</h4>
                             <span>Manager Perusahaan di Surabaya</span>
                         </div>

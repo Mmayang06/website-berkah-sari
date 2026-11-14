@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Berkah Sari - Jasa Gardening & Landscaping Terbaik')
+@section('title', 'Silih Asih - Jasa Gardening & Landscaping Terbaik')
 
 @section('content')
 
@@ -102,13 +102,13 @@
         <div class="container">
             <div class="row g-5 align-items-end">
                 <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <img class="img-fluid rounded" src="{{ asset('img/about.jpg') }}" alt="About Berkah Sari">
+                    <img class="img-fluid rounded" src="{{ asset('img/about.jpg') }}" alt="About Silih Asih">
                 </div>
                 <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
                     <h1 class="display-1 text-primary mb-0">25</h1>
                     <p class="text-primary mb-4">Tahun Pengalaman</p>
                     <h1 class="display-5 mb-4">Kami Jadikan Rumah Anda Seperti Taman</h1>
-                    <p class="mb-4">Berkah Sari adalah jasa gardening dan landscaping terpercaya dengan pengalaman lebih dari 25 tahun. Kami berkomitmen memberikan solusi terbaik untuk taman impian Anda.</p>
+                    <p class="mb-4">Silih Asih adalah jasa gardening dan landscaping terpercaya dengan pengalaman lebih dari 25 tahun. Kami berkomitmen memberikan solusi terbaik untuk taman impian Anda.</p>
                     <a class="btn btn-primary py-3 px-4" href="{{ route('about') }}">Selengkapnya</a>
                 </div>
                 <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
@@ -447,13 +447,13 @@
                     <div class="owl-carousel testimonial-carousel">
                         <div class="testimonial-item">
                             <img class="img-fluid rounded mb-3" src="{{ asset('img/testimonial-1.jpg') }}" alt="">
-                            <p class="fs-5">"Berkah Sari mengubah halaman rumah kami menjadi taman impian yang indah. Sangat puas dengan hasilnya!"</p>
+                            <p class="fs-5">"Silih Asih mengubah halaman rumah kami menjadi taman impian yang indah. Sangat puas dengan hasilnya!"</p>
                             <h4>Budi Santoso</h4>
                             <span>Pemilik Rumah</span>
                         </div>
                         <div class="testimonial-item">
                             <img class="img-fluid rounded mb-3" src="{{ asset('img/testimonial-2.jpg') }}" alt="">
-                            <p class="fs-5">"Tim Berkah Sari sangat profesional dan tepat waktu. Taman kantor kami sekarang jauh lebih indah."</p>
+                            <p class="fs-5">"Tim Silih Asih sangat profesional dan tepat waktu. Taman kantor kami sekarang jauh lebih indah."</p>
                             <h4>Siti Rahayu</h4>
                             <span>Manager Perusahaan</span>
                         </div>

@@ -1,7 +1,7 @@
 @extends('layouts.petugas_input')
 
-@section('title', 'Input Minyak Jelantah - Berkah Sari')
-@section('brand_title', 'Berkah Sari Minyak Jelantah')
+@section('title', 'Input Minyak Jelantah - Silih Asih')
+@section('brand_title', 'Silih Asih Minyak Jelantah')
 @section('page-title', 'Input Minyak Jelantah')
 
 @section('topbar_action')

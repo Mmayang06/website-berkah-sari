@@ -15,7 +15,7 @@
 <body>
     <table>
         <tr>
-            <td colspan="7" class="title">LAPORAN ARUS KAS (CASH FLOW) BANK SAMPAH BERKAH SARI</td>
+            <td colspan="7" class="title">LAPORAN ARUS KAS (CASH FLOW) BANK SAMPAH SILIH ASIH</td>
         </tr>
         <tr>
             <td colspan="7" class="sub">Periode: {{ $labelPeriode }}</td>

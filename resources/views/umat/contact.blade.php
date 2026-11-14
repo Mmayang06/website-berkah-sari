@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Hubungi Kami - Berkah Sari')
+@section('title', 'Hubungi Kami - Silih Asih')
 
 @section('content')
 
@@ -43,7 +43,7 @@
                         </div>
                         <div>
                             <p class="mb-0 fw-bold">Email</p>
-                            <p class="mb-0">info@berkahsari.com</p>
+                            <p class="mb-0">info@silihasih.com</p>
                         </div>
                     </div>
                 </div>

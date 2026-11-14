@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'Berkah Sari - Gardening Services')</title>
+    <title>@yield('title', 'Silih Asih - Gardening Services')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="@yield('keywords', 'gardening, landscaping, garden services')" name="keywords">
     <meta content="@yield('description', 'Professional gardening and landscaping services')" name="description">

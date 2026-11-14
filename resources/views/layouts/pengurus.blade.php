@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'Admin Panel - Berkah Sari')</title>
+    <title>@yield('title', 'Admin Panel - Silih Asih')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="@yield('description', 'Panel Admin Berkah Sari')" name="description">
+    <meta content="@yield('description', 'Panel Admin Silih Asih')" name="description">
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.ico') }}" rel="icon">
@@ -817,7 +817,7 @@
                 <i class="fas fa-bars fs-5"></i>
             </button>
             <a href="{{ route('pengurus.dashboard') }}" class="topbar-brand">
-                <h1>Berkah Sari</h1>
+                <h1>Silih Asih</h1>
             </a>
         </div>
 

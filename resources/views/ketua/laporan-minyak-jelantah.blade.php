@@ -1,6 +1,6 @@
 @extends('layouts.ketua')
 
-@section('title', 'Laporan Minyak Jelantah - Berkah Sari')
+@section('title', 'Laporan Minyak Jelantah - Silih Asih')
 @section('page-title', 'Laporan Minyak Jelantah')
 
 @section('content')

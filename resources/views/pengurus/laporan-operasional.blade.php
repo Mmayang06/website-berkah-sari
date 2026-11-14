@@ -1,6 +1,6 @@
 @extends('layouts.pengurus')
 
-@section('title', 'Laporan Operasional - Berkah Sari')
+@section('title', 'Laporan Operasional - Silih Asih')
 @section('page-title', 'Laporan Operasional')
 
 @section('content')

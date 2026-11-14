@@ -1,6 +1,6 @@
 @extends('layouts.ketua')
 
-@section('title', 'Bank Sampah Induk - Berkah Sari')
+@section('title', 'Bank Sampah Induk - Silih Asih')
 @section('page-title', 'Bank Sampah Induk')
 
 

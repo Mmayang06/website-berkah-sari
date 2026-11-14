@@ -15,7 +15,7 @@
 <body>
     <table>
         <tr>
-            <td colspan="{{ $tipe === 'triwulan' ? '7' : '7' }}" class="title">REKAP BANK SAMPAH BERKAH SARI</td>
+            <td colspan="{{ $tipe === 'triwulan' ? '7' : '7' }}" class="title">REKAP BANK SAMPAH SILIH ASIH</td>
         </tr>
         <tr>
             <td colspan="{{ $tipe === 'triwulan' ? '7' : '7' }}" class="sub">Periode: {{ $labelPeriode }}</td>
