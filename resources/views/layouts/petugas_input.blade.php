@@ -347,6 +347,150 @@
             .petugas-sidebar.show { transform: translateX(0); }
             .petugas-main { margin-left: 0; }
         }
+
+        /* Form Controls */
+        .form-label-custom {
+            display: inline-block;
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: .45rem;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .form-control-custom {
+            display: block;
+            width: 100%;
+            padding: .55rem 1rem;
+            font-size: .875rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--dark);
+            background-color: #fff;
+            border: 1px solid rgba(15, 66, 41, 0.15);
+            border-radius: 8px;
+            transition: border-color .2s, box-shadow .2s;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .form-control-custom:focus {
+            border-color: var(--primary);
+            outline: 0;
+            box-shadow: 0 0 0 3px rgba(52, 142, 56, 0.12);
+        }
+        .form-control-custom::placeholder {
+            color: #8c9b93;
+            opacity: 0.8;
+        }
+        .form-select-custom {
+            display: block;
+            width: 100%;
+            padding: .55rem 2.25rem .55rem 1rem;
+            font-size: .875rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--dark);
+            background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%230F4229' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") no-repeat right 1rem center / 12px 10px;
+            border: 1px solid rgba(15, 66, 41, 0.15);
+            border-radius: 8px;
+            transition: border-color .2s, box-shadow .2s;
+            appearance: none;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .form-select-custom:focus {
+            border-color: var(--primary);
+            outline: 0;
+            box-shadow: 0 0 0 3px rgba(52, 142, 56, 0.12);
+        }
+
+        /* Summary Cards */
+        .summary-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid rgba(15, 66, 41, .08);
+            box-shadow: 0 2px 12px rgba(15, 66, 41, .03);
+            height: 100%;
+        }
+        .summary-label {
+            font-size: .78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: #6C7E75;
+            margin-bottom: .4rem;
+        }
+        .summary-value {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.1;
+        }
+        .summary-unit {
+            font-size: .75rem;
+            color: #8c9b93;
+            margin-top: .35rem;
+        }
+
+        /* Table Card Custom */
+        .table-card-custom {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid rgba(15, 66, 41, .08);
+            box-shadow: 0 2px 12px rgba(15, 66, 41, .03);
+            overflow: hidden;
+        }
+        .table-header-control {
+            background: #fff;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(15, 66, 41, .06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .tbl-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: .95rem;
+            color: var(--dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tbl-title i { color: var(--primary); }
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            vertical-align: middle;
+        }
+        .table-custom th, .table-custom td {
+            padding: .8rem 1.1rem;
+            border-bottom: 1px solid rgba(15, 66, 41, .05);
+        }
+        .table-custom th {
+            background: #F8FAF9;
+            color: #6C7E75;
+            font-size: .72rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: .05em;
+            border-bottom: 1px solid rgba(15, 66, 41, .08);
+            white-space: nowrap;
+        }
+        .table-custom tbody tr:hover { background: rgba(52, 142, 56, .025); }
+        .table-custom tbody tr:last-child td { border-bottom: none; }
+        .table-footer-control {
+            background: #fff;
+            padding: .75rem 1.25rem;
+            border-top: 1px solid rgba(15, 66, 41, .06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: .8rem;
+            color: #6C7E75;
+        }
     </style>
 
     @stack('styles')

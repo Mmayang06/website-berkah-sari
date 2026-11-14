@@ -1,538 +1,215 @@
 @extends('layouts.petugas_input')
 
-@section('title', 'Dashboard Minyak Jelantah - Berkah Sari')
+@section('title', 'Input Minyak Jelantah - Berkah Sari')
 @section('brand_title', 'Berkah Sari Minyak Jelantah')
-@section('page-title', 'Dashboard Minyak Jelantah')
+@section('page-title', 'Input Minyak Jelantah')
 
 @section('topbar_action')
-    <a href="{{ route('petugas.dashboard_bs') }}" class="btn-switch-module" title="Switch ke Bank Sampah">
+    <a href="{{ route('petugas.dashboard_bs') }}" class="btn-switch-module" title="Pindah ke Bank Sampah">
         <i class="fas fa-recycle icon-module"></i>
-        <span>Pinah ke Bank Sampah</span>
+        <span>Pindah ke Bank Sampah</span>
         <i class="fas fa-exchange-alt ms-1 text-muted" style="font-size:0.75rem;"></i>
     </a>
-@endsection
-
-@push('styles')
-<style>
-    .welcome-banner {
-        background: var(--dark);
-        border-radius: 4px;
-        padding: 26px 30px;
-        margin-bottom: 28px;
-        box-shadow: 0 0 45px rgba(0,0,0,.08);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .welcome-banner h5 {
-        color: var(--light);
-        font-family: 'Jost', sans-serif;
-        font-weight: 700;
-        margin: 0 0 4px;
-    }
-
-    .welcome-banner p {
-        color: rgba(232,245,233,0.65);
-        font-size: 0.875rem;
-        margin: 0;
-    }
-
-    .welcome-stats {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-
-    .welcome-stat {
-        background: rgba(52,142,56,0.25);
-        border-radius: 4px;
-        padding: 10px 20px;
-        text-align: center;
-    }
-
-    .welcome-stat .val {
-        font-family: 'Jost', sans-serif;
-        font-weight: 700;
-        font-size: 1.4rem;
-        color: var(--primary);
-        line-height: 1;
-    }
-
-    .welcome-stat .lbl {
-        font-size: 0.72rem;
-        color: rgba(232,245,233,0.6);
-        margin-top: 3px;
-    }
-
-    .mini-stat {
-        background: #fff;
-        border-radius: 4px;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        box-shadow: 0 0 45px rgba(0,0,0,.08);
-        transition: .5s;
-        border-bottom: 3px solid var(--primary);
-    }
-
-    .mini-stat:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 45px rgba(15,66,41,.15);
-    }
-
-    .mini-stat-icon {
-        width: 52px;
-        height: 52px;
-        background: var(--light);
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        color: var(--primary);
-        flex-shrink: 0;
-        transition: .5s;
-    }
-
-    .mini-stat:hover .mini-stat-icon {
-        background: var(--primary);
-        color: var(--light);
-    }
-
-    .mini-stat-val {
-        font-family: 'Jost', sans-serif;
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: var(--dark);
-        line-height: 1;
-    }
-
-    .mini-stat-lbl {
-        font-size: 0.8rem;
-        color: var(--secondary);
-        margin-top: 4px;
-    }
-
-    .form-card {
-        background: #fff;
-        border-radius: 4px;
-        box-shadow: 0 0 45px rgba(0,0,0,.08);
-        overflow: hidden;
-    }
-
-    .form-card-header {
-        background: var(--dark);
-        padding: 16px 24px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .form-card-header h6 {
-        color: var(--light);
-        font-family: 'Jost', sans-serif;
-        font-weight: 600;
-        font-size: 1rem;
-        margin: 0;
-    }
-
-    .form-card-header i {
-        color: var(--primary);
-    }
-
-    .form-card-body {
-        padding: 24px;
-    }
-
-    .form-label-sm {
-        font-family: 'Jost', sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: var(--dark);
-        margin-bottom: 6px;
-    }
-
-    .form-control:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 0.2rem rgba(52,142,56,0.15);
-    }
-
-    .section-card {
-        background: #fff;
-        border-radius: 4px;
-        box-shadow: 0 0 45px rgba(0,0,0,.08);
-        overflow: hidden;
-    }
-
-    .section-card-header {
-        padding: 16px 24px;
-        border-bottom: 1px solid var(--light);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .section-card-title {
-        font-family: 'Jost', sans-serif;
-        font-weight: 600;
-        font-size: 1rem;
-        color: var(--dark);
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .section-card-title i {
-        color: var(--primary);
-    }
-
-    .input-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .input-table thead th {
-        background: var(--light);
-        color: var(--dark);
-        font-family: 'Jost', sans-serif;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        padding: 11px 16px;
-        border: none;
-    }
-
-    .input-table tbody td {
-        padding: 12px 16px;
-        border-bottom: 1px solid var(--light);
-        color: var(--secondary);
-        font-size: 0.85rem;
-        vertical-align: middle;
-    }
-
-    .input-table tbody tr:last-child td { border-bottom: none; }
-
-    .input-table tbody tr:hover td {
-        background: #fafff8;
-        color: var(--dark);
-    }
-
-    .status-badge {
-        padding: 3px 10px;
-        border-radius: 4px;
-        font-size: 0.7rem;
-        font-weight: 600;
-        font-family: 'Jost', sans-serif;
-        display: inline-block;
-    }
-
-    .badge-tersimpan { background: var(--light); color: var(--dark); }
-    .badge-pesanan   { background: #cce5ff; color: #004085; }
-    .badge-klien     { background: #fff3cd; color: #856404; }
-    .badge-proyek    { background: #e2d9f3; color: #4a1f8e; }
-
-    .action-btn {
-        width: 30px;
-        height: 30px;
-        border-radius: 4px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        text-decoration: none;
-        transition: .5s;
-        border: none;
-        cursor: pointer;
-    }
-
-    .btn-edit   { background: var(--light); color: var(--primary); }
-    .btn-delete { background: #f8d7da; color: #721c24; }
-    .btn-edit:hover   { background: var(--primary); color: var(--light); }
-    .btn-delete:hover { background: #721c24; color: #fff; }
-
-    .target-card {
-        background: #fff;
-        border-radius: 4px;
-        box-shadow: 0 0 45px rgba(0,0,0,.08);
-        padding: 20px 24px;
-    }
-
-    .target-title {
-        font-family: 'Jost', sans-serif;
-        font-weight: 600;
-        color: var(--dark);
-        font-size: 1rem;
-        margin-bottom: 16px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .target-title i { color: var(--primary); }
-
-    .progress {
-        height: 8px;
-        border-radius: 4px;
-        background: var(--light);
-    }
-
-    .progress-bar {
-        background: var(--primary);
-        border-radius: 4px;
-    }
-</style>
-@endpush
-
-@section('subnav-actions')
-    <a href="#" class="btn btn-sm btn-primary py-1 px-3" style="font-family:'Jost',sans-serif;font-weight:600;font-size:0.8rem;">
-        <i class="fas fa-plus me-1"></i> Input Baru
+    <a href="{{ route('petugas.pilih') }}" class="btn btn-sm btn-outline-secondary d-none d-md-inline-flex align-items-center gap-1" style="border-radius: 50px; font-size: 0.8rem; font-weight: 600; padding: 6px 14px;">
+        <i class="fas fa-th-large"></i> Menu
     </a>
 @endsection
 
 @section('content')
 
-<div class="welcome-banner">
-    <div>
-        <h5>Halo, Petugas! 👋</h5>
-        <p>Semangat kerja hari ini, {{ now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</p>
+<div style="margin-bottom: 20px;">
+    <h4 style="font-family:'Jost',sans-serif; font-weight:700; color:var(--dark); margin:0 0 4px; font-size:1.25rem;">
+        Input Minyak Jelantah
+    </h4>
+    <p style="color:#6C7E75; font-size:.85rem; margin:0;">
+        Input setoran minyak jelantah donatur hari ini ({{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}).
+    </p>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="summary-card">
+            <div class="summary-label">Total Transaksi Hari Ini</div>
+            <div class="summary-value" id="rekap-transaksi">{{ $rekapHariIni->total_transaksi }}</div>
+            <div class="summary-unit">Setoran masuk</div>
+        </div>
     </div>
-    <div class="welcome-stats">
-        <div class="welcome-stat">
-            <div class="val">12</div>
-            <div class="lbl">Input Hari Ini</div>
-        </div>
-        <div class="welcome-stat">
-            <div class="val">58</div>
-            <div class="lbl">Minggu Ini</div>
-        </div>
-        <div class="welcome-stat">
-            <div class="val">214</div>
-            <div class="lbl">Bulan Ini</div>
+    <div class="col-md-6">
+        <div class="summary-card">
+            <div class="summary-label">Total Volume Minyak</div>
+            <div class="summary-value text-primary">
+                <span id="rekap-berat">{{ number_format($rekapHariIni->total_berat, 2, ',', '.') }}</span>
+                <span style="font-size:1rem; font-weight:500; color:var(--secondary)">Liter</span>
+            </div>
+            <div class="summary-unit">Total liter terkumpul hari ini</div>
         </div>
     </div>
 </div>
 
-<div class="row g-4 mb-4">
-    <div class="col-sm-4">
-        <div class="mini-stat">
-            <div class="mini-stat-icon"><i class="fas fa-clipboard-check"></i></div>
-            <div>
-                <div class="mini-stat-val">12</div>
-                <div class="mini-stat-lbl">Pesanan diinput hari ini</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="mini-stat">
-            <div class="mini-stat-icon"><i class="fas fa-hard-hat"></i></div>
-            <div>
-                <div class="mini-stat-val">4</div>
-                <div class="mini-stat-lbl">Proyek diinput hari ini</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="mini-stat">
-            <div class="mini-stat-icon"><i class="fas fa-user-check"></i></div>
-            <div>
-                <div class="mini-stat-val">7</div>
-                <div class="mini-stat-lbl">Klien baru diinput</div>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="alertBox" style="display: none;" class="mb-3"></div>
 
 <div class="row g-4">
-    <div class="col-lg-5">
-        <div class="form-card mb-4">
-            <div class="form-card-header">
-                <i class="fas fa-plus-circle"></i>
-                <h6>Input Pesanan Baru</h6>
-            </div>
-            <div class="form-card-body">
-                <form>
-                    <div class="mb-3">
-                        <div class="form-label-sm">Nama Klien</div>
-                        <input type="text" class="form-control bg-light border-0" placeholder="Masukkan nama klien" id="input-nama-klien">
-                    </div>
-                    <div class="mb-3">
-                        <div class="form-label-sm">No. HP</div>
-                        <input type="text" class="form-control bg-light border-0" placeholder="08xx-xxxx-xxxx" id="input-nohp">
-                    </div>
-                    <div class="mb-3">
-                        <div class="form-label-sm">Jenis Layanan</div>
-                        <select class="form-control bg-light border-0" id="input-layanan">
-                            <option value="">-- Pilih Layanan --</option>
-                            <option>Landscaping</option>
-                            <option>Pemangkasan Tanaman</option>
-                            <option>Irigasi & Drainase</option>
-                            <option>Garden Maintenance</option>
-                            <option>Urban Gardening</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <div class="form-label-sm">Alamat</div>
-                        <textarea class="form-control bg-light border-0" rows="2" placeholder="Alamat pengerjaan" id="input-alamat"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <div class="form-label-sm">Tanggal Pesanan</div>
-                        <input type="date" class="form-control bg-light border-0" value="{{ now()->format('Y-m-d') }}" id="input-tanggal">
-                    </div>
-                    <button type="submit" class="btn btn-primary py-3 w-100" style="font-family:'Jost',sans-serif;font-weight:600;">
-                        <i class="fas fa-save me-2"></i> Simpan Pesanan
-                    </button>
-                </form>
-            </div>
-        </div>
+    <div class="col-12 col-lg-5">
+        <div class="card border-light shadow-sm p-4">
+            <h5 class="card-title mb-4" style="font-family:'Jost',sans-serif; font-weight:700; color:var(--dark);">
+                Form Input Minyak Jelantah
+            </h5>
 
-        <div class="target-card">
-            <div class="target-title">
-                <i class="fas fa-bullseye"></i> Target Bulan Ini
-            </div>
-            <div class="mb-3">
-                <div class="d-flex justify-content-between mb-2">
-                    <span style="font-size:0.83rem;color:var(--secondary);">Pesanan</span>
-                    <span style="font-size:0.83rem;font-weight:600;color:var(--primary);">214 / 300</span>
+            <form id="formQuickEntry">
+                @csrf
+                <div class="mb-3">
+                    <label for="input-tanggal" class="form-label-custom">Tanggal Setoran</label>
+                    <input type="date" class="form-control-custom" id="input-tanggal" name="tanggal" value="{{ date('Y-m-d') }}" required>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 71%"></div>
+
+                <div class="mb-3">
+                    <label for="select-lingkungan" class="form-label-custom">Lingkungan</label>
+                    <select class="form-select-custom" id="select-lingkungan" name="id_lingkungan" required autofocus>
+                        <option value="">Pilih Lingkungan</option>
+                        @foreach($daftarLingkungan as $l)
+                            <option value="{{ $l->id_lingkungan }}">{{ $l->nama_lingkungan }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </div>
-            <div class="mb-3">
-                <div class="d-flex justify-content-between mb-2">
-                    <span style="font-size:0.83rem;color:var(--secondary);">Klien Baru</span>
-                    <span style="font-size:0.83rem;font-weight:600;color:var(--primary);">87 / 100</span>
+
+                <div class="mb-3">
+                    <label for="select-kategori" class="form-label-custom">Jenis Minyak</label>
+                    <select class="form-select-custom" id="select-kategori" name="id_kategori" required>
+                        <option value="" data-satuan="Liter">Pilih Jenis Minyak</option>
+                        @foreach($kategori as $k)
+                            <option value="{{ $k->id_kategori }}" data-satuan="{{ $k->satuan }}" {{ $loop->first ? 'selected' : '' }}>
+                                {{ $k->jenis }} ({{ $k->satuan }})
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 87%"></div>
+
+                <div class="mb-3">
+                    <label for="input-berat" class="form-label-custom">Volume Minyak (<span id="lbl-satuan">Liter</span>)</label>
+                    <input type="number" step="0.01" min="0.01" class="form-control-custom" id="input-berat" name="berat" placeholder="Masukkan volume (contoh: 5.0)" required>
                 </div>
-            </div>
-            <div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span style="font-size:0.83rem;color:var(--secondary);">Proyek Selesai</span>
-                    <span style="font-size:0.83rem;font-weight:600;color:var(--primary);">32 / 50</span>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 64%"></div>
-                </div>
-            </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 mt-2" id="btnSimpan" style="font-family:'Jost',sans-serif; font-weight:600; border-radius:8px;">
+                    Simpan Setoran
+                </button>
+            </form>
         </div>
     </div>
 
-    <div class="col-lg-7">
-        <div class="section-card">
-            <div class="section-card-header">
-                <h6 class="section-card-title">
-                    <i class="fas fa-history"></i> Riwayat Input Saya
-                </h6>
-                <a href="#" class="btn btn-sm btn-primary py-1 px-3" style="font-size:0.78rem;">Lihat Semua</a>
-            </div>
-            <div class="p-3">
-                <div class="d-flex gap-2 mb-3">
-                    <input type="text" class="form-control bg-light border-0" placeholder="Cari data..." style="font-size:0.83rem;" id="search-riwayat">
-                    <select class="form-control bg-light border-0" style="font-size:0.83rem;width:auto;" id="filter-riwayat">
-                        <option>Semua</option>
-                        <option>Pesanan</option>
-                        <option>Proyek</option>
-                        <option>Klien</option>
-                    </select>
-                </div>
-            </div>
-            <div style="overflow-x:auto;">
-                <table class="input-table">
+    <div class="col-12 col-lg-7">
+        <div class="card border-light shadow-sm p-4">
+            <h5 class="card-title mb-4" style="font-family:'Jost',sans-serif; font-weight:700; color:var(--dark);">
+                Daftar Setoran Hari Ini
+            </h5>
+
+            <div class="table-responsive">
+                <table class="table-custom" id="tblSetoranHariIni">
                     <thead>
                         <tr>
-                            <th>Waktu</th>
-                            <th>Jenis</th>
-                            <th>Keterangan</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
+                            <th style="width: 40px;">No</th>
+                            <th>Lingkungan</th>
+                            <th>Jenis Minyak</th>
+                            <th style="text-align: right;">Volume</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="white-space:nowrap;font-size:0.78rem;">29 Sep, 14:30</td>
-                            <td><span class="status-badge badge-pesanan">Pesanan</span></td>
-                            <td>Budi Santoso — Landscaping</td>
-                            <td><span class="status-badge badge-tersimpan">Tersimpan</span></td>
-                            <td>
-                                <button class="action-btn btn-edit me-1"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="white-space:nowrap;font-size:0.78rem;">29 Sep, 13:15</td>
-                            <td><span class="status-badge badge-klien">Klien</span></td>
-                            <td>Siti Rahayu — Klien Baru</td>
-                            <td><span class="status-badge badge-tersimpan">Tersimpan</span></td>
-                            <td>
-                                <button class="action-btn btn-edit me-1"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="white-space:nowrap;font-size:0.78rem;">29 Sep, 11:00</td>
-                            <td><span class="status-badge badge-proyek">Proyek</span></td>
-                            <td>Ahmad Fauzi — Taman Belakang</td>
-                            <td><span class="status-badge badge-tersimpan">Tersimpan</span></td>
-                            <td>
-                                <button class="action-btn btn-edit me-1"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="white-space:nowrap;font-size:0.78rem;">28 Sep, 16:45</td>
-                            <td><span class="status-badge badge-pesanan">Pesanan</span></td>
-                            <td>Dewi Lestari — Pemangkasan</td>
-                            <td><span class="status-badge badge-tersimpan">Tersimpan</span></td>
-                            <td>
-                                <button class="action-btn btn-edit me-1"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="white-space:nowrap;font-size:0.78rem;">28 Sep, 14:20</td>
-                            <td><span class="status-badge badge-klien">Klien</span></td>
-                            <td>Rudi Hartono — Klien Baru</td>
-                            <td><span class="status-badge badge-tersimpan">Tersimpan</span></td>
-                            <td>
-                                <button class="action-btn btn-edit me-1"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="white-space:nowrap;font-size:0.78rem;">28 Sep, 10:00</td>
-                            <td><span class="status-badge badge-proyek">Proyek</span></td>
-                            <td>Maya Putri — Taman Depan</td>
-                            <td><span class="status-badge badge-tersimpan">Tersimpan</span></td>
-                            <td>
-                                <button class="action-btn btn-edit me-1"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
+                        @forelse($setoranHariIni as $i => $row)
+                            <tr id="row-{{ $row->id_setoran }}">
+                                <td>{{ $i + 1 }}</td>
+                                <td>
+                                    <div class="fw-bold text-dark">{{ $row->nama_lingkungan }}</div>
+                                </td>
+                                <td>{{ $row->jenis_sampah }}</td>
+                                <td style="text-align: right;" class="fw-bold">
+                                    {{ number_format($row->berat, 2, ',', '.') }} {{ $row->satuan }}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr id="row-empty">
+                                <td colspan="4" class="text-center py-4 text-muted">
+                                    Belum ada data setoran hari ini.
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
-            </div>
-            <div class="d-flex justify-content-between align-items-center px-4 py-3" style="border-top:1px solid var(--light);">
-                <span style="font-size:0.78rem;color:var(--secondary);">Menampilkan 6 dari 214 data</span>
-                <nav>
-                    <ul class="pagination pagination-sm mb-0">
-                        <li class="page-item disabled"><a class="page-link" href="#">‹</a></li>
-                        <li class="page-item active"><a class="page-link" href="#" style="background:var(--primary);border-color:var(--primary);">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">›</a></li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    $('#select-kategori').on('change', function() {
+        var satuan = $('#select-kategori option:selected').data('satuan') || 'Liter';
+        $('#lbl-satuan').text(satuan);
+    });
+
+    function showNotif(pesan, tipe) {
+        var html = `
+            <div class="alert alert-${tipe} alert-dismissible fade show" role="alert">
+                ${pesan}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `;
+        $('#alertBox').html(html).slideDown(200);
+        setTimeout(function() {
+            $('#alertBox').slideUp(300);
+        }, 3000);
+    }
+
+    $('#formQuickEntry').on('submit', function(e) {
+        e.preventDefault();
+
+        var btn = $('#btnSimpan');
+        btn.prop('disabled', true).text('Menyimpan...');
+
+        $.ajax({
+            url: "{{ route('petugas.store') }}",
+            type: "POST",
+            data: $(this).serialize(),
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function(res) {
+                btn.prop('disabled', false).text('Simpan Setoran');
+
+                if (res.status === 'success') {
+                    $('#row-empty').remove();
+
+                    var barisBaru = `
+                        <tr id="row-${res.data.id_setoran}">
+                            <td>•</td>
+                            <td>
+                                <div class="fw-bold text-dark">${res.data.nama_lingkungan}</div>
+                            </td>
+                            <td>${res.data.jenis_sampah}</td>
+                            <td style="text-align: right;" class="fw-bold">${res.data.berat} ${res.data.satuan}</td>
+                        </tr>
+                    `;
+
+                    $('#tblSetoranHariIni tbody').prepend(barisBaru);
+
+                    $('#rekap-transaksi').text(res.rekap.total_transaksi);
+                    $('#rekap-berat').text(res.rekap.total_berat);
+
+                    $('#input-berat').val('');
+                    $('#select-lingkungan').focus();
+
+                    showNotif(res.message, 'success');
+                }
+            },
+            error: function(xhr) {
+                btn.prop('disabled', false).text('Simpan Setoran');
+                var err = 'Gagal menyimpan data setoran.';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    err = xhr.responseJSON.message;
+                }
+                showNotif(err, 'danger');
+            }
+        });
+    });
+</script>
+@endpush

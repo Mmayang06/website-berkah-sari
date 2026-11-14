@@ -8,6 +8,7 @@ use App\Http\Controllers\PengepulController;
 use App\Http\Controllers\KategoriSampahController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\TabunganLingkunganController;
+use App\Http\Controllers\PetugasInputController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -97,26 +98,23 @@ Route::prefix('ketua')->name('ketua.')->middleware(['auth', 'role:admin,ketua'])
 
 
 // petugas input
-Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas'])->group(function () {
+Route::prefix('petugas')->name('petugas.')->middleware(['auth', 'role:petugas,ketua,admin'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('petugas.pilih');
     });
 
-    Route::get('/pilih-input', function () {
-        return view('petugas_input.pilih');
-    })->name('pilih');
+    Route::get('/pilih-input', [PetugasInputController::class, 'pilih'])->name('pilih');
 
     Route::get('/dashboard', function () {
         return redirect()->route('petugas.pilih');
     })->name('dashboard');
 
-    Route::get('/dashboard-bs', function () {
-        return view('petugas_input.dashboard_bs');
-    })->name('dashboard_bs');
+    Route::get('/dashboard-bs', [PetugasInputController::class, 'dashboardBs'])->name('dashboard_bs');
+    Route::get('/dashboard-mijel', [PetugasInputController::class, 'dashboardMijel'])->name('dashboard_mijel');
 
-    Route::get('/dashboard-mijel', function () {
-        return view('petugas_input.dashboard_mijel');
-    })->name('dashboard_mijel');
+    Route::post('/store', [PetugasInputController::class, 'store'])->name('store');
+    Route::post('/store-donatur', [PetugasInputController::class, 'storeDonatur'])->name('store_donatur');
+    Route::delete('/destroy/{id}', [PetugasInputController::class, 'destroy'])->name('destroy');
 });
 
 
